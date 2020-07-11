@@ -1,10 +1,19 @@
 from tkinter import *
 
 root = Tk()
-root.title("GUI")
 
-myButton=Button(root, text="Click me!", ).pack()
+def myClick():
+    myLabel = Label(root, text="I clicked a Button!",)
+    myLabel.pack()
+
+
+myButton=Button(root, text="Click me!", command=myClick, fg="blue", bg="yellow")
+myButton.pack()
+
+# Button's parameters
 # state=DISABLED
-# for size: padx=50, pady=50
+# size: padx=50, pady=50
+# text color: fg="blue", 
+# command=myFunction
 
 root.mainloop()
