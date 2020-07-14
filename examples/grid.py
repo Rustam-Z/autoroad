@@ -9,5 +9,5 @@ window.title("GUI")
 label = Label(window, text="Hello World!").grid(row=0, column=0)
 label2 = Label(window, text="   Hello World!").grid(row=1, column=1)
 
-
+# for running the program
 window.mainloop()
