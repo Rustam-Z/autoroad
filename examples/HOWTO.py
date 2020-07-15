@@ -13,4 +13,7 @@ if __name__ == "__main__":
     MainApplication(root).pack(side="top", fill="both", expand=True)
     root.mainloop()
 
-# PART2:
+# PART2: Current working directory
+import os
+def rcpath(rel_path):
+    return os.path.join(os.getcwd(), rel_path)
