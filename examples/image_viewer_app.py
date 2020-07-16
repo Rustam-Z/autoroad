@@ -9,7 +9,7 @@ root.iconbitmap('examples/photos/icon.ico')
 # Images location
 img1 = ImageTk.PhotoImage(Image.open("examples/photos/python.png"))
 img2 = ImageTk.PhotoImage(Image.open("examples/photos/python-file.png"))
-img3 = ImageTk.PhotoImage(Image.open("examples/photos/python-file (1).png"))
+img3 = ImageTk.PhotoImage(Image.open("examples/photos/python-file-1.png"))
 img_list = [img1, img2, img3]
 
 # Labels & Status bar in footer
