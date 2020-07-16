@@ -1,0 +1,50 @@
+                      REFERENCES:
+• Put the venv in your .gitignore:
+    git init
+    echo 'venv' > .gitignore
+-> tkinter tutorial: https://www.tutorialspoint.com/python/python_gui_programming.htm
+-> tkinter YouTube tutorial series: https://www.youtube.com/watch?v=yQSEXcf6s2I&list 
+-> https://realpython.com/openpyxl-excel-spreadsheets-python/
+-> https://www.geeksforgeeks.org/writing-excel-sheet-using-python/
+                      QUESTIONS:
+• how to open an excel spreadsheet in tkinter application;
+• how to make a db;
+• how to fill the excel template with data from db;
+• print button in tkinter application;
+=====================================================
+                       TKINTER:
+WIDGETS: Label, Button, Entry, ImageTk, LabelFrame, Radio
+
+PART 1:
+• declare the widget and put on screen(pack, grid);
+• LABEL
+  from tkinter import *
+  window = Tk()
+  # to rename title of the window window.title("GUI")
+  # window.iconbitmap("icon.ico")
+  # pack is used to show the object in the window
+  label = Label(window, text="Hello World!").pack()
+  window.mainloop()
+
+• GRID SYSTEM
+  my_widget.grid(row=0, column=0)
+
+• BUTTON
+  my_button = Button(window, text="Click me!", command).pack()
+  parameters: state=DISABLED, padx=50(size), pady=50, fg, bg;
+
+• ENTRY
+  my_entry = Entry(window).pack()
+
+• IMAGES
+  from PIL import Image, ImageTk
+  my_img = ImageTk.PhotoImage(Image.open  ('examples/photos/image.jpg'))
+  my_label = Label(image=my_img)
+  my_label.pack()
+
+• FRAMES
+  frame = LabelFrame(root, padx=5, pady=5) # inside
+  frame.pack(padx=100, pady=100) # outside
+  button = Button(frame, text="Click me!").pack()
+
+• RADIO BUTTOM
