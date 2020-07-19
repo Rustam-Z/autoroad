@@ -1,5 +1,5 @@
                       REFERENCES:
-• Put the venv in your .gitignore:
+ï¿½ Put the venv in your .gitignore:
     git init
     echo 'venv' > .gitignore
 -> tkinter tutorial: https://www.tutorialspoint.com/python/python_gui_programming.htm
@@ -7,17 +7,17 @@
 -> https://realpython.com/openpyxl-excel-spreadsheets-python/
 -> https://www.geeksforgeeks.org/writing-excel-sheet-using-python/
                       QUESTIONS:
-• how to open an excel spreadsheet in tkinter application;
-• how to make a db;
-• how to fill the excel template with data from db;
-• print button in tkinter application;
+ï¿½ how to open an excel spreadsheet in tkinter application;
+ï¿½ how to make a db;
+ï¿½ how to fill the excel template with data from db;
+ï¿½ print button in tkinter application;
 =====================================================
                        TKINTER:
 WIDGETS: Label, Button, Entry, ImageTk, LabelFrame, Radio
 
 PART 1:
-• declare the widget and put on screen(pack, grid);
-• LABEL
+ï¿½ declare the widget and put on screen(pack, grid);
+ï¿½ LABEL
   from tkinter import *
   window = Tk()
   # to rename title of the window window.title("GUI")
@@ -26,28 +26,28 @@ PART 1:
   label = Label(window, text="Hello World!").pack()
   window.mainloop()
 
-• GRID SYSTEM
+ï¿½ GRID SYSTEM
   my_widget.grid(row=0, column=0)
 
-• BUTTON
+ï¿½ BUTTON
   my_button = Button(window, text="Click me!", command).pack()
   parameters: state=DISABLED, padx=50(size), pady=50, fg, bg;
 
-• ENTRY
+ï¿½ ENTRY
   my_entry = Entry(window).pack()
 
-• IMAGES
+ï¿½ IMAGES
   from PIL import Image, ImageTk
   my_img = ImageTk.PhotoImage(Image.open  ('examples/photos/image.jpg'))
   my_label = Label(image=my_img)
   my_label.pack()
 
-• FRAMES
+ï¿½ FRAMES
   frame = LabelFrame(root, padx=5, pady=5) # inside
   frame.pack(padx=100, pady=100) # outside
   button = Button(frame, text="Click me!").pack()
 
-• RADIO BUTTOM/DROPDOWN
+ï¿½ RADIO BUTTOM/DROPDOWN
 
 ======================================================
 PART 2: SQL-> MySQL
@@ -67,5 +67,7 @@ PART 2: SQL-> MySQL
      res = my_cursor.fetchall()
      for i in res:
     	print(i)
+
+==================================================
 
 
