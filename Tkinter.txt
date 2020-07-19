@@ -47,4 +47,25 @@ PART 1:
   frame.pack(padx=100, pady=100) # outside
   button = Button(frame, text="Click me!").pack()
 
-• RADIO BUTTOM
+• RADIO BUTTOM/DROPDOWN
+
+======================================================
+PART 2: SQL-> MySQL
+1. my_db = mysql.connector.connect(host="localhost", user="root", passwd="1234")
+2. create cursor: my_cursor = my_db.cursor()
+3. create db: my_cursor.execute("CREATE DATABASE codemy")
+3.1. check to see if db was created:
+     my_cursor.execute("SHOW DATABASES")
+     for db in my_cursor:
+         print(db)
+3.2. comment CREATE DATABASE
+4. create a table: my_cursor.execute("CREATE TABLE IF NOT EXISTS customers (name VARCHAR(255), phone int(10))")
+5. then add in my_db: database = "codemy"
+6. comment CREATE TABLE
+7. check if data was added to db:
+     my_cursor.execute("select * from customers ")
+     res = my_cursor.fetchall()
+     for i in res:
+    	print(i)
+
+
