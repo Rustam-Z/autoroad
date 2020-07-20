@@ -23,6 +23,11 @@ def command_file_new():
     hide_all_frames()
     file_new_frame.pack(fill="both", expand=1)
     Label(file_new_frame, text="it is just for checking New->File").pack()
+    Button(file_new_frame, text="Test", command=testing).pack()
+
+
+def testing():
+    Label(file_new_frame, text="hello World").pack()
 
 
 def command_edit_cut():
