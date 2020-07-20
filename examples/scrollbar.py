@@ -1,9 +1,15 @@
 from tkinter import *
+from tkinter import messagebox
+from tkinter import ttk  # Normal Tkinter.* widgets are not themed!
+from ttkthemes import ThemedTk
 
-root = Tk()
+
+root = ThemedTk(theme="breeze")
+root.title("Menu Bar")
+root.iconbitmap('examples/photos/icon.ico')
 root.geometry("400x400")
 
-scrollbar = Scrollbar(root)
+scrollbar = ttk.Scrollbar(root)
 scrollbar.pack(side=RIGHT, fill=Y)
 
 my_list = Listbox(root, yscrollcommand=scrollbar.set)
