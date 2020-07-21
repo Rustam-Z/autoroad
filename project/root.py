@@ -2,28 +2,28 @@ from tkinter import *
 from tkinter import messagebox
 from tkinter import ttk  # Normal Tkinter.* widgets are not themed!
 from ttkthemes import ThemedTk
+import os
 
 
 class Root:
     def __init__(self, master):
-        frame = ttk.Frame(master)
-        frame.pack()
         self.my_menu = Menu(master)
         master.config(menu=self.my_menu)
+        self.master = master
 
         # Create a Menu Item for Teachers
         self.file_menu = Menu(self.my_menu, tearoff=False)
         self.my_menu.add_cascade(label="Укитувчи", menu=self.file_menu)
         self.file_menu.add_command(label="Кошиш", command=self.command_file_new)
-        self.file_menu.add_command(label="Янгилаш", command=master.quit)
-        self.file_menu.add_command(label="Учириш", command=master.quit)
+        self.file_menu.add_command(label="Янгилаш", command=self.master.quit)
+        self.file_menu.add_command(label="Учириш", command=self.master.quit)
 
         # Create a Menu Item Groups
         self.edit_menu = Menu(self.my_menu, tearoff=False)
         self.my_menu.add_cascade(label="Гуруҳ", menu=self.edit_menu)
         self.edit_menu.add_command(label="Кошиш", command=self.command_edit_cut)
-        self.edit_menu.add_command(label="Янгилаш", command=master.quit)
-        self.edit_menu.add_command(label="Учириш", command=master.quit)
+        self.edit_menu.add_command(label="Янгилаш", command=self.master.quit)
+        self.edit_menu.add_command(label="Учириш", command=self.master.quit)
 
         # Create a Menu Item for Students
         self.edit_menu = Menu(self.my_menu, tearoff=False)
@@ -35,11 +35,27 @@ class Root:
         self.my_menu.add_cascade(label="Инфо", menu=self.edit_menu)
         self.edit_menu.add_command(label="Cut", command=self.command_edit_cut)
         self.edit_menu.add_separator()
-        self.edit_menu.add_command(label="Question", command=master.quit)
+        self.edit_menu.add_command(label="Question", command=self.master.quit)
 
         # Create some frames
-        self.file_new_frame = ttk.Frame(master, width=400, height=400)
-        self.edit_cut_frame = ttk.Frame(master, width=400, height=400)
+        self.file_new_frame = ttk.Frame(self.master, width=400, height=400)
+        self.edit_cut_frame = ttk.Frame(self.master, width=400, height=400)
+
+        # Showing the list of groups
+        files_list = os.listdir('groups')
+        files_list_box = Listbox(self.master)
+        files_list_box.pack(side=TOP, anchor=NW)
+        # THE ITEMS INSERTED WITH A LOOP
+        for item in files_list:
+            item = item[:-5]
+            files_list_box.insert(END, item)
+
+        # files_list = os.listdir('groups')
+        # item_count = 0
+        # for item in files_list:
+        #     btn = ttk.Button(master, text=item[:-5], )
+        #     btn.pack(side=TOP, anchor=NW)
+        #     item_count += 1
 
     def hide_all_frames(self):
         """Clears the screen after pressing the menu item"""
@@ -81,3 +97,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+
