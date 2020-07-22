@@ -1,18 +1,14 @@
 import tkinter as tk
-import sys
-from tkinter import messagebox
 from tkinter import ttk  # Normal Tkinter.* widgets are not themed!
 from ttkthemes import ThemedStyle
+from tkinter import messagebox
+import sys
 import os
 
 
 class MenuBar(tk.Menu):
     def __init__(self, master):
         tk.Menu.__init__(self, master)
-
-        self.frame = ttk.Frame(master)
-        self.frame.pack()
-
         self.master = master
 
         # Create a Menu Item for Teachers
@@ -28,26 +24,26 @@ class MenuBar(tk.Menu):
         info_menu = tk.Menu(self, tearoff=False)
 
         # Add the cascades for menu bar
-        self.add_cascade(label="Укитувчи", menu=teachers_menu)
+        self.add_cascade(label="Ўқитувчилар", menu=teachers_menu)
         self.add_cascade(label="Гуруҳ", menu=groups_menu)
-        self.add_cascade(label="Укивчилар", menu=students_menu)
+        self.add_cascade(label="Ўқувчилар", menu=students_menu)
         self.add_cascade(label="Инфо", menu=info_menu)
 
         # Teachers
-        teachers_menu.add_command(label="Кошиш", command=self.teachers_add)
+        teachers_menu.add_command(label="Қўшиш", command=self.teachers_add)
         teachers_menu.add_command(label="Янгилаш", command=self.teachers_edit)
-        teachers_menu.add_command(label="Учириш", command=self.teachers_delete)
+        teachers_menu.add_command(label="Ўчириш", command=self.teachers_delete)
 
         # Groups
-        groups_menu.add_command(label="Кошиш", command=self.groups_add)
+        groups_menu.add_command(label="Қўшиш", command=self.groups_add)
         groups_menu.add_command(label="Янгилаш", command=self.groups_edit)
-        groups_menu.add_command(label="Учириш", command=self.groups_delete)
+        groups_menu.add_command(label="Ўчириш", command=self.groups_delete)
 
         # Students
-        students_menu.add_command(label="База", command=self.students_db)
+        students_menu.add_command(label="Mаълумотлар базаси", command=self.students_db)
 
         # Info
-        info_menu.add_command(label="Дастур хакида малумот", command=self.info_about)
+        info_menu.add_command(label="Илова ҳақида", command=self.info_about)
         info_menu.add_separator()
 
         # Create frames for each new window --MenuBar-Cascade-Commands
@@ -67,7 +63,7 @@ class MenuBar(tk.Menu):
     def hide_all_frames(self):
         """Cleans the screen after pressing the menu item"""
         for widget in self.teachers_add_frame.winfo_children():
-             widget.destroy()
+            widget.destroy()
 
         for widget in self.teachers_edit_frame.winfo_children():
             widget.destroy()
@@ -103,8 +99,60 @@ class MenuBar(tk.Menu):
     def teachers_add(self):
         self.hide_all_frames()
         self.teachers_add_frame.pack(fill="both", expand=1)
-        p1 = ttk.Label(self.teachers_add_frame, text="Teachers Add")
-        p1.pack()
+
+        # Creating a Notebook
+        teachers_notebook = ttk.Notebook(self.teachers_add_frame)
+        teachers_notebook.pack(pady=10, padx=10)
+
+        # initialize frames for notebooks
+        instructors_frame = ttk.Frame(teachers_notebook)
+        others_frame = ttk.Frame(teachers_notebook)
+
+        # place frames in the screen
+        instructors_frame.pack(fill="both", expand=1)
+        others_frame.pack(fill="both", expand=1)
+
+        # add the notebooks
+        teachers_notebook.add(instructors_frame, text="Усталap")
+        teachers_notebook.add(others_frame, text="Ўқитувчилар")
+
+        # =========== Create Main Form To Enter Teachers Form ===========
+        first_name_label = ttk.Label(instructors_frame, text="Исм").grid(row=1, column=0, padx=10)
+        middle_name_label = ttk.Label(instructors_frame, text="Фамилия").grid(row=2, column=0, padx=10)
+        last_name_label = ttk.Label(instructors_frame, text="Отчество").grid(row=3, column=0, padx=10)
+        license_number_label = ttk.Label(instructors_frame, text="Х/Г №").grid(row=4, column=0, padx=10)
+        garage_number_label = ttk.Label(instructors_frame, text="Гар. №").grid(row=5, column=0, padx=10)
+        car_label = ttk.Label(instructors_frame, text="Марка").grid(row=6, column=0, padx=10)
+        car_number_label = ttk.Label(instructors_frame, text="Гос. №").grid(row=7, column=0, padx=10)
+
+        application_label = ttk.Label(instructors_frame, text="Заявка учун маълумотлар: ").grid(row=8, column=0, padx=10, columnspan=2)
+        education_label = ttk.Label(instructors_frame, text="Маълумоти").grid(row=9, column=0, padx=10)
+        type_license_label = ttk.Label(instructors_frame, text="Tоифа").grid(row=10, column=0, padx=10)
+        internship_label = ttk.Label(instructors_frame, text="Стаж").grid(row=11, column=0, padx=10)
+
+
+        # =========== Create Entry Box ===========
+        first_name_box = ttk.Entry(instructors_frame)
+        first_name_box.grid(row=1, column=1, pady=3, padx=7)
+        middle_name_box = ttk.Entry(instructors_frame)
+        middle_name_box.grid(row=2, column=1, pady=3)
+        last_name_box = ttk.Entry(instructors_frame)
+        last_name_box.grid(row=3, column=1, pady=3)
+        license_number_box = ttk.Entry(instructors_frame)
+        license_number_box.grid(row=4, column=1, pady=3)
+        garage_number_box = ttk.Entry(instructors_frame)
+        garage_number_box.grid(row=5, column=1, pady=3)
+        car_box = ttk.Entry(instructors_frame)
+        car_box.grid(row=6, column=1, pady=3)
+        car_number_box = ttk.Entry(instructors_frame)
+        car_number_box.grid(row=7, column=1, pady=3)
+
+        education_box = ttk.Entry(instructors_frame)
+        education_box.grid(row=9, column=1, pady=3)
+        type_license_box = ttk.Entry(instructors_frame)
+        type_license_box.grid(row=10, column=1, pady=3)
+        internship_box = ttk.Entry(instructors_frame)
+        internship_box.grid(row=11, column=1, pady=3)
 
     def teachers_edit(self):
         self.hide_all_frames()
@@ -182,7 +230,7 @@ class App(tk.Tk):
 if __name__ == "__main__":
     app = App(None)
     app.title("AutoRoad")
-    app.geometry("400x400")
+    app.geometry("500x500+250+100")
     style = ThemedStyle(app)
     style.set_theme("breeze")
     app.mainloop()
