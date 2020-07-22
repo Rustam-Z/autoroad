@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk  # Normal Tkinter.* widgets are not themed!
 from ttkthemes import ThemedStyle
-from tkinter import messagebox
+from tkinter import messagebox, END
 import sys
 import os
 
@@ -125,11 +125,11 @@ class MenuBar(tk.Menu):
         car_label = ttk.Label(instructors_frame, text="Марка").grid(row=6, column=0, padx=10)
         car_number_label = ttk.Label(instructors_frame, text="Гос. №").grid(row=7, column=0, padx=10)
 
-        application_label = ttk.Label(instructors_frame, text="Заявка учун маълумотлар: ").grid(row=8, column=0, padx=10, columnspan=2)
+        application_label = ttk.Label(instructors_frame, text="Заявка учун маълумотлар: ").grid(row=8, column=0,
+                                                                                                padx=10, columnspan=2)
         education_label = ttk.Label(instructors_frame, text="Маълумоти").grid(row=9, column=0, padx=10)
         type_license_label = ttk.Label(instructors_frame, text="Tоифа").grid(row=10, column=0, padx=10)
         internship_label = ttk.Label(instructors_frame, text="Стаж").grid(row=11, column=0, padx=10)
-
 
         # =========== Create Entry Box ===========
         first_name_box = ttk.Entry(instructors_frame)
@@ -153,6 +153,55 @@ class MenuBar(tk.Menu):
         type_license_box.grid(row=10, column=1, pady=3)
         internship_box = ttk.Entry(instructors_frame)
         internship_box.grid(row=11, column=1, pady=3)
+
+        # function which add a teacher to db
+        def db_teachers_add():
+            entry_list = [child for child in instructors_frame.winfo_children()
+                          if isinstance(child, ttk.Entry)]
+
+            if len(first_name_box.get()) == 0:
+                messagebox.showwarning("Warning message!", "Please fill First Name entries!")
+            elif len(middle_name_box.get()) == 0:
+                messagebox.showwarning("Warning message!", "Please fill Middle name entries!")
+            elif len(last_name_box.get()) == 0:
+                messagebox.showwarning("Warning message!", "Please fill all entries!")
+            elif len(license_number_box.get()) == 0:
+                messagebox.showwarning("Warning message!", "Please fill all entries!")
+            elif len(garage_number_box.get()) == 0:
+                messagebox.showwarning("Warning message!", "Please fill all entries!")
+            elif len(car_box.get()) == 0:
+                messagebox.showwarning("Warning message!", "Please fill all entries!")
+            elif len(car_number_box.get()) == 0:
+                messagebox.showwarning("Warning message!", "Please fill all entries!")
+            elif len(education_box.get()) == 0:
+                messagebox.showwarning("Warning message!", "Please fill all entries!")
+            elif len(type_license_box.get()) == 0:
+                messagebox.showwarning("Warning message!", "Please fill all entries!")
+            elif len(internship_box.get()) == 0:
+                messagebox.showwarning("Warning message!", "Please fill all entries!")
+            else:
+                messagebox.showinfo("Success message", "Teacher has been added in database successfully!")
+
+            first_name_box.delete(0, END)
+            middle_name_box.delete(0, END)
+            last_name_box.delete(0, END)
+            license_number_box.delete(0, END)
+            garage_number_box.delete(0, END)
+            car_box.delete(0, END)
+            car_number_box.delete(0, END)
+            education_box.delete(0, END)
+            type_license_box.delete(0, END)
+            internship_box.delete(0, END)
+
+            # if len(entry_list) == 10:
+            #     messagebox.showinfo("Success message", "Teacher has been added in database successfully!")
+            # else:
+            #     messagebox.showwarning("Warning message!", "Please fill all entries!")
+
+        # =========== Create Buttons to Submit ===========
+        # Create a Submit Button
+        query_btn = ttk.Button(instructors_frame, text="Маълумотлар базасига қўшиш", command=db_teachers_add)
+        query_btn.grid(row=12, column=0, columnspan=2, pady=10)
 
     def teachers_edit(self):
         self.hide_all_frames()
