@@ -117,6 +117,7 @@ class MenuBar(tk.Menu):
         teachers_notebook.add(others_frame, text="Ўқитувчилар")
 
         # =========== Create Main Form To Enter Teachers Form ===========
+        # Усталap -- First notebook
         first_name_label = ttk.Label(instructors_frame, text="Исм").grid(row=1, column=0, padx=10)
         middle_name_label = ttk.Label(instructors_frame, text="Фамилия").grid(row=2, column=0, padx=10)
         last_name_label = ttk.Label(instructors_frame, text="Отчество").grid(row=3, column=0, padx=10)
@@ -131,7 +132,7 @@ class MenuBar(tk.Menu):
         type_license_label = ttk.Label(instructors_frame, text="Tоифа").grid(row=10, column=0, padx=10)
         internship_label = ttk.Label(instructors_frame, text="Стаж").grid(row=11, column=0, padx=10)
 
-        # =========== Create Entry Box ===========
+        # Create Entry Box for the first notebook
         first_name_box = ttk.Entry(instructors_frame)
         first_name_box.grid(row=1, column=1, pady=3, padx=7)
         middle_name_box = ttk.Entry(instructors_frame)
@@ -154,11 +155,38 @@ class MenuBar(tk.Menu):
         internship_box = ttk.Entry(instructors_frame)
         internship_box.grid(row=11, column=1, pady=3)
 
+        # Ўқитувчилар -- Second notebook
+        t_first_name_label = ttk.Label(others_frame, text="Исм").grid(row=1, column=0, padx=10)
+        t_middle_name_label = ttk.Label(others_frame, text="Фамилия").grid(row=2, column=0, padx=10)
+        t_last_name_label = ttk.Label(others_frame, text="Отчество").grid(row=3, column=0, padx=10)
+        t_education_label = ttk.Label(others_frame, text="Маълумоти").grid(row=4, column=0, padx=10)
+        t_specialization_label = ttk.Label(others_frame, text="Мутахасислиги").grid(row=5, column=0, padx=10)
+
+        OptionList = [
+            "Aвто. туз.",
+            "Taurus",
+            "Gemini",
+            "Cancer"
+        ]
+
+        # Create Entry Box for the first notebook
+        t_first_name_box = ttk.Entry(others_frame)
+        t_first_name_box.grid(row=1, column=1, pady=3, padx=7)
+        t_middle_name_box = ttk.Entry(others_frame)
+        t_middle_name_box.grid(row=2, column=1, pady=3)
+        t_last_name_box = ttk.Entry(others_frame)
+        t_last_name_box.grid(row=3, column=1, pady=3)
+        t_education_box = ttk.Entry(others_frame)
+        t_education_box.grid(row=4, column=1, pady=3)
+        t_specialization_box = ttk.Entry(others_frame)
+        t_specialization_box.grid(row=5, column=1, pady=3)
+
         # function which add a teacher to db
         def db_teachers_add():
             entry_list = [child for child in instructors_frame.winfo_children()
                           if isinstance(child, ttk.Entry)]
 
+            # checking whether all entries are full
             if len(first_name_box.get()) == 0:
                 messagebox.showwarning("Огоҳлантириш хабари!", "Илтимос, барча ёзувларни тўлдиринг!")
             elif len(middle_name_box.get()) == 0:
@@ -182,6 +210,7 @@ class MenuBar(tk.Menu):
             else:
                 messagebox.showinfo("Муваффақият хабари", "Ўқитувчи маълумотлар базасига муваффақиятли қўшилди!")
 
+            # removing the old data from cells
             first_name_box.delete(0, END)
             middle_name_box.delete(0, END)
             last_name_box.delete(0, END)
@@ -198,10 +227,35 @@ class MenuBar(tk.Menu):
             # else:
             #     messagebox.showwarning("Warning message!", "Please fill all entries!")
 
-        # =========== Create Buttons to Submit ===========
-        # Create a Submit Button
-        query_btn = ttk.Button(instructors_frame, text="Маълумотлар базасига қўшиш", command=db_teachers_add)
-        query_btn.grid(row=12, column=0, columnspan=2, pady=10)
+        def db_others_add():
+            # checking whether all entries are full
+            if len(t_first_name_box.get()) == 0:
+                messagebox.showwarning("Огоҳлантириш хабари!", "Илтимос, барча ёзувларни тўлдиринг!")
+            elif len(t_middle_name_box.get()) == 0:
+                messagebox.showwarning("Огоҳлантириш хабари!", "Илтимос, барча ёзувларни тўлдиринг!")
+            elif len(t_last_name_box.get()) == 0:
+                messagebox.showwarning("Огоҳлантириш хабари!", "Илтимос, барча ёзувларни тўлдиринг!")
+            elif len(t_education_box.get()) == 0:
+                messagebox.showwarning("Огоҳлантириш хабари!", "Илтимос, барча ёзувларни тўлдиринг!")
+            elif len(t_specialization_box.get()) == 0:
+                messagebox.showwarning("Огоҳлантириш хабари!", "Илтимос, барча ёзувларни тўлдиринг!")
+            else:
+                messagebox.showinfo("Муваффақият хабари", "Ўқитувчи маълумотлар базасига муваффақиятли қўшилди!")
+
+            # removing the old data from cells
+            t_first_name_box.delete(0, END)
+            t_middle_name_box.delete(0, END)
+            t_last_name_box.delete(0, END)
+            t_education_box.delete(0, END)
+            t_specialization_box.delete(0, END)
+
+        # =========== Create Buttons ===========
+        # Button for saving the info into db
+        instructors_add = ttk.Button(instructors_frame, text="Маълумотлар базасига қўшиш", command=db_teachers_add)
+        instructors_add.grid(row=12, column=0, columnspan=2, pady=5)
+        instructors_add = ttk.Button(others_frame, text="Маълумотлар базасига қўшиш", command=db_others_add)
+        instructors_add.grid(row=6, column=0, columnspan=2, pady=5)
+
 
     def teachers_edit(self):
         self.hide_all_frames()
