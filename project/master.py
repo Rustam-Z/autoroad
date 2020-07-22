@@ -160,27 +160,27 @@ class MenuBar(tk.Menu):
                           if isinstance(child, ttk.Entry)]
 
             if len(first_name_box.get()) == 0:
-                messagebox.showwarning("Warning message!", "Please fill First Name entries!")
+                messagebox.showwarning("Огоҳлантириш хабари!", "Илтимос, барча ёзувларни тўлдиринг!")
             elif len(middle_name_box.get()) == 0:
-                messagebox.showwarning("Warning message!", "Please fill Middle name entries!")
+                messagebox.showwarning("Огоҳлантириш хабари!", "Илтимос, барча ёзувларни тўлдиринг!")
             elif len(last_name_box.get()) == 0:
-                messagebox.showwarning("Warning message!", "Please fill all entries!")
+                messagebox.showwarning("Огоҳлантириш хабари!", "Илтимос, барча ёзувларни тўлдиринг!")
             elif len(license_number_box.get()) == 0:
-                messagebox.showwarning("Warning message!", "Please fill all entries!")
+                messagebox.showwarning("Огоҳлантириш хабари!", "Илтимос, барча ёзувларни тўлдиринг!")
             elif len(garage_number_box.get()) == 0:
-                messagebox.showwarning("Warning message!", "Please fill all entries!")
+                messagebox.showwarning("Огоҳлантириш хабари!", "Илтимос, барча ёзувларни тўлдиринг!")
             elif len(car_box.get()) == 0:
-                messagebox.showwarning("Warning message!", "Please fill all entries!")
+                messagebox.showwarning("Огоҳлантириш хабари!", "Илтимос, барча ёзувларни тўлдиринг!")
             elif len(car_number_box.get()) == 0:
-                messagebox.showwarning("Warning message!", "Please fill all entries!")
+                messagebox.showwarning("Огоҳлантириш хабари!", "Илтимос, барча ёзувларни тўлдиринг!")
             elif len(education_box.get()) == 0:
-                messagebox.showwarning("Warning message!", "Please fill all entries!")
+                messagebox.showwarning("Огоҳлантириш хабари!", "Илтимос, барча ёзувларни тўлдиринг!")
             elif len(type_license_box.get()) == 0:
-                messagebox.showwarning("Warning message!", "Please fill all entries!")
+                messagebox.showwarning("Огоҳлантириш хабари!", "Илтимос, барча ёзувларни тўлдиринг!")
             elif len(internship_box.get()) == 0:
-                messagebox.showwarning("Warning message!", "Please fill all entries!")
+                messagebox.showwarning("Огоҳлантириш хабари!", "Илтимос, барча ёзувларни тўлдиринг!")
             else:
-                messagebox.showinfo("Success message", "Teacher has been added in database successfully!")
+                messagebox.showinfo("Муваффақият хабари", "Ўқитувчи маълумотлар базасига муваффақиятли қўшилди!")
 
             first_name_box.delete(0, END)
             middle_name_box.delete(0, END)
