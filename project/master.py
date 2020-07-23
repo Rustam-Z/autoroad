@@ -256,7 +256,6 @@ class MenuBar(tk.Menu):
         instructors_add = ttk.Button(others_frame, text="Маълумотлар базасига қўшиш", command=db_others_add)
         instructors_add.grid(row=6, column=0, columnspan=2, pady=5)
 
-
     def teachers_edit(self):
         self.hide_all_frames()
         self.teachers_edit_frame.pack(fill="both", expand=1)
@@ -266,10 +265,39 @@ class MenuBar(tk.Menu):
     def teachers_delete(self):
         self.hide_all_frames()
         self.teachers_delete_frame.pack(fill="both", expand=1)
-        p3 = ttk.Label(self.teachers_delete_frame, text="Teachers Delete")
-        p3.pack()
+        p3 = ttk.Label(self.teachers_delete_frame, text="Ўчирмоқчи бўлган ўқитувчини танланг: ")
+        p3.pack(padx=10, pady=10)
 
-    # Create methods for Groups
+        OptionList = [
+            "Aries",
+            "Taurus",
+            "Gemini",
+            "Cancer"
+        ]
+
+        variable = tk.StringVar(self.teachers_delete_frame)
+        variable.set(OptionList[0])
+
+        opt = ttk.OptionMenu(self.teachers_delete_frame, variable, OptionList[0], *OptionList)
+        opt.config(width=50)
+        opt.pack(side="top")
+
+        labelTest = ttk.Label(self.teachers_delete_frame, text="Танланган элемент - {}".format(OptionList[0]))
+        labelTest.pack(side="top", pady=10, padx=10)
+
+        def callback(*args):
+            labelTest.configure(text="Танланган элемент - {}".format(variable.get()))
+
+        variable.trace("w", callback)
+
+        def delete():
+            messagebox.showinfo("Муваффақият хабари", "Ўқитувчи маълумотлар базасидан муваффақиятли ўчирилди!")
+
+        # Create a Delete Button
+        delete_btn = ttk.Button(self.teachers_delete_frame, text="Ўчириш", command=delete)
+        delete_btn.pack()
+
+        # Create methods for Groups
     def groups_add(self):
         self.hide_all_frames()
         self.groups_add_frame.pack(fill="both", expand=1)
