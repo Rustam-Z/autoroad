@@ -2,11 +2,7 @@ import tkinter as tk
 from tkinter import ttk  # Normal Tkinter.* widgets are not themed!
 from ttkthemes import ThemedStyle
 from tkinter import messagebox, END
-from tkcalendar import Calendar, DateEntry
-
-import sys
-import os
-
+from tkcalendar import DateEntry
 
 class MenuBar(tk.Menu):
     def __init__(self, master):
@@ -539,7 +535,9 @@ class MenuBar(tk.Menu):
         cal.grid(row=1, column=3, padx=10, pady=10)
         # print(cal.get_date())
 
-        lecture_duration_label = ttk.Label(groups_inside_frame, text="Назарий машғулот\n          соати").grid(row=2, column=0, padx=10)
+        lecture_duration_label = ttk.Label(groups_inside_frame, text="Назарий машғулот\n          соати").grid(row=2,
+                                                                                                               column=0,
+                                                                                                               padx=10)
         OptionList_L_start = ["6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "17", "18", "19", "20"]
         variable = tk.StringVar(groups_inside_frame)
         variable.set(OptionList_L_start[0])
@@ -555,7 +553,9 @@ class MenuBar(tk.Menu):
         opt.config(width=16)
         opt.grid(row=2, column=3, padx=10, pady=10)
 
-        practice_duration_label = ttk.Label(groups_inside_frame, text="Амалий машғулот\n         соати").grid(row=3, column=0, padx=10)
+        practice_duration_label = ttk.Label(groups_inside_frame, text="Амалий машғулот\n         соати").grid(row=3,
+                                                                                                              column=0,
+                                                                                                              padx=10)
         OptionList_P_start = ["6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "17", "18", "19", "20"]
         variable = tk.StringVar(groups_inside_frame)
         variable.set(OptionList_P_start[0])
@@ -590,6 +590,8 @@ class MenuBar(tk.Menu):
         opt = ttk.OptionMenu(groups_inside_frame, variable, OptionList_doctor[0], *OptionList_doctor)
         opt.config(width=16)
         opt.grid(row=4, column=3, padx=10, pady=10)
+
+        # Masters
 
     def groups_edit(self):
         self.hide_all_frames()
