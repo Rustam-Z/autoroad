@@ -4,6 +4,7 @@ from ttkthemes import ThemedStyle
 from tkinter import messagebox, END
 from tkcalendar import DateEntry
 
+
 class MenuBar(tk.Menu):
     def __init__(self, master):
         tk.Menu.__init__(self, master)
@@ -116,23 +117,21 @@ class MenuBar(tk.Menu):
 
         # =========== Create Main Form To Enter Teachers Form ===========
         # Усталap -- First notebook
-        first_name_label = ttk.Label(instructors_frame, text="Исм").grid(row=1, column=0, padx=10)
+        first_name_label = ttk.Label(instructors_frame, text="Исм").grid(row=1, column=0, padx=10, pady=10)
         middle_name_label = ttk.Label(instructors_frame, text="Фамилия").grid(row=2, column=0, padx=10)
         last_name_label = ttk.Label(instructors_frame, text="Отчество").grid(row=3, column=0, padx=10)
         license_number_label = ttk.Label(instructors_frame, text="Х/Г №").grid(row=4, column=0, padx=10)
         garage_number_label = ttk.Label(instructors_frame, text="Гар. №").grid(row=5, column=0, padx=10)
         car_label = ttk.Label(instructors_frame, text="Марка").grid(row=6, column=0, padx=10)
         car_number_label = ttk.Label(instructors_frame, text="Гос. №").grid(row=7, column=0, padx=10)
-
-        application_label = ttk.Label(instructors_frame, text="Заявка учун маълумотлар: ").grid(row=8, column=0,
-                                                                                                padx=10, columnspan=2)
-        education_label = ttk.Label(instructors_frame, text="Маълумоти").grid(row=9, column=0, padx=10)
+        application_label = ttk.Label(instructors_frame, text="Заявка учун маълумотлар: ").grid(row=8, column=0, padx=10, columnspan=2)
+        education_label = ttk.Label(instructors_frame, text="      Маълумоти     ").grid(row=9, column=0)
         type_license_label = ttk.Label(instructors_frame, text="Tоифа").grid(row=10, column=0, padx=10)
         internship_label = ttk.Label(instructors_frame, text="Стаж").grid(row=11, column=0, padx=10)
 
         # Create Entry Box for the first notebook
         first_name_box = ttk.Entry(instructors_frame)
-        first_name_box.grid(row=1, column=1, pady=3, padx=7)
+        first_name_box.grid(row=1, column=1, pady=3)
         middle_name_box = ttk.Entry(instructors_frame)
         middle_name_box.grid(row=2, column=1, pady=3)
         last_name_box = ttk.Entry(instructors_frame)
@@ -145,7 +144,6 @@ class MenuBar(tk.Menu):
         car_box.grid(row=6, column=1, pady=3)
         car_number_box = ttk.Entry(instructors_frame)
         car_number_box.grid(row=7, column=1, pady=3)
-
         education_box = ttk.Entry(instructors_frame)
         education_box.grid(row=9, column=1, pady=3)
         type_license_box = ttk.Entry(instructors_frame)
@@ -154,22 +152,22 @@ class MenuBar(tk.Menu):
         internship_box.grid(row=11, column=1, pady=3)
 
         # Ўқитувчилар -- Second notebook
+        OptionList_1 = ["6", "7"]
+        variable_1 = tk.StringVar(others_frame)
+        variable_1.set(OptionList_1[0])
+        opt_1 = ttk.OptionMenu(others_frame, variable_1, OptionList_1[0], *OptionList_1)
+        opt_1.config(width=24)
+        opt_1.grid(row=0, column=0, pady=5, columnspan=2)
+
         t_first_name_label = ttk.Label(others_frame, text="Исм").grid(row=1, column=0, padx=10)
         t_middle_name_label = ttk.Label(others_frame, text="Фамилия").grid(row=2, column=0, padx=10)
         t_last_name_label = ttk.Label(others_frame, text="Отчество").grid(row=3, column=0, padx=10)
         t_education_label = ttk.Label(others_frame, text="Маълумоти").grid(row=4, column=0, padx=10)
         t_specialization_label = ttk.Label(others_frame, text="Мутахасислиги").grid(row=5, column=0, padx=10)
 
-        OptionList = [
-            "Aвто. туз.",
-            "Taurus",
-            "Gemini",
-            "Cancer"
-        ]
-
         # Create Entry Box for the first notebook
         t_first_name_box = ttk.Entry(others_frame)
-        t_first_name_box.grid(row=1, column=1, pady=3, padx=7)
+        t_first_name_box.grid(row=1, column=1, pady=3, padx=10)
         t_middle_name_box = ttk.Entry(others_frame)
         t_middle_name_box.grid(row=2, column=1, pady=3)
         t_last_name_box = ttk.Entry(others_frame)
@@ -271,7 +269,7 @@ class MenuBar(tk.Menu):
 
         # add the notebooks
         teachers_edit_notebook.add(instructors_edit_frame, text="Усталapни Янгилаш")
-        teachers_edit_notebook.add(others_edit_frame, text="Ўқитувчиларни Янгилаш")
+        teachers_edit_notebook.add(others_edit_frame, text="Ўқит-ни Янгилаш")
 
         # =========== Create Main Form To Enter Teachers Form ===========
         # Усталap -- First notebook
@@ -288,7 +286,7 @@ class MenuBar(tk.Menu):
 
         opt = ttk.OptionMenu(instructors_edit_frame, variable, OptionListForInstructors[0], *OptionListForInstructors)
         opt.config(width=30)
-        opt.grid(row=0, column=0, columnspan=2, padx=10, pady=10)
+        opt.grid(row=0, column=0, columnspan=2, pady=5)
 
         first_name_label = ttk.Label(instructors_edit_frame, text="Исм").grid(row=1, column=0, padx=10)
         middle_name_label = ttk.Label(instructors_edit_frame, text="Фамилия").grid(row=2, column=0, padx=10)
@@ -297,11 +295,8 @@ class MenuBar(tk.Menu):
         garage_number_label = ttk.Label(instructors_edit_frame, text="Гар. №").grid(row=5, column=0, padx=10)
         car_label = ttk.Label(instructors_edit_frame, text="Марка").grid(row=6, column=0, padx=10)
         car_number_label = ttk.Label(instructors_edit_frame, text="Гос. №").grid(row=7, column=0, padx=10)
-
-        application_label = ttk.Label(instructors_edit_frame, text="Заявка учун маълумотлар: ").grid(row=8, column=0,
-                                                                                                     padx=10,
-                                                                                                     columnspan=2)
-        education_label = ttk.Label(instructors_edit_frame, text="Маълумоти").grid(row=9, column=0, padx=10)
+        application_label = ttk.Label(instructors_edit_frame, text="Заявка учун маълумотлар: ").grid(row=8, column=0, padx=10,columnspan=2)
+        education_label = ttk.Label(instructors_edit_frame, text="Маълумоти ").grid(row=9, column=0, padx=20)
         type_license_label = ttk.Label(instructors_edit_frame, text="Tоифа").grid(row=10, column=0, padx=10)
         internship_label = ttk.Label(instructors_edit_frame, text="Стаж").grid(row=11, column=0, padx=10)
 
@@ -362,7 +357,7 @@ class MenuBar(tk.Menu):
 
         opt = ttk.OptionMenu(others_edit_frame, variable, OptionListForOthers[0], *OptionListForOthers)
         opt.config(width=30)
-        opt.grid(row=0, column=0, columnspan=2, padx=10, pady=10)
+        opt.grid(row=0, column=0, columnspan=2, padx=10, pady=5)
         t_first_name_label = ttk.Label(others_edit_frame, text="Исм").grid(row=1, column=0, padx=10)
         t_middle_name_label = ttk.Label(others_edit_frame, text="Фамилия").grid(row=2, column=0, padx=10)
         t_last_name_label = ttk.Label(others_edit_frame, text="Отчество").grid(row=3, column=0, padx=10)
