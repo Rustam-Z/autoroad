@@ -401,32 +401,6 @@ class MenuBar(tk.Menu):
         internship_box = ttk.Entry(instructors_edit_frame)
         internship_box.grid(row=11, column=1, pady=3)
 
-        # =============================================================
-        # Getting the old data from db and showing it on screen
-        # select * from the given variable.get() and then create a list of data
-
-        # def callback(*args):
-        #     # labelTest.configure(text="The selected item is {}".format(variable.get()))
-        #     print(variable_master.get())
-        #     record_selected = []
-        #     for records in masters:
-        #         if records[0] == variable_master.get():
-        #             record_selected = records
-        #     print("Records: " + str(record_selected))
-
-        #     #first_name_box.insert(0, (record_selected[0].split()[0])[:len(record_selected[0].split()[0])//2]
-        #     # middle_name_box.insert(0, len(record_selected[0].split()[1])/2)
-        #     # last_name_box.insert(0, len(record_selected[0].split()[2])/2)
-        #     # license_number_box.insert(0, len(str(record_selected[1]))/2)
-        #     # garage_number_box.insert(0, len(str(record_selected[2]))/2)
-        #     # car_box.insert(0, len(str(record_selected[3]))/2)
-        #     # car_number_box.insert(0, len(str(record_selected[4]))/2)
-        #     # education_box.insert(0, " ")
-        #     # type_license_box.insert(0, " ")
-        #     # internship_box.insert(0, " ")
-    
-        # variable_master.trace("w", callback) # write
-
         # Ўқитувчилар -- Second notebook
         # Option List for the "Ўқитувчилар" -- the data comes from the database
         OptionListForOthers = [
@@ -464,6 +438,29 @@ class MenuBar(tk.Menu):
         def db_teachers_edit():
             entry_list = [child for child in instructors_edit_frame.winfo_children()
                           if isinstance(child, ttk.Entry)]
+
+            # Opening Excel File
+            wbDataBase = xw.Book('DataBase.xlsm')
+
+            # Sheets
+            wsDataBase = wbDataBase.sheets['TEACHERS']
+
+            # Taking Value and Add into Sheets
+
+            # Bitta usta ma'lumotlari
+            Condition = True
+            num = 5
+            while Condition:
+                if wsDataBase.cells(num, "B").value == record_selected[0]:
+                    wsDataBase.cells(num, "B").value = [
+                        middle_name_box.get() + " " + first_name_box.get() + " " + last_name_box.get(),
+                        license_number_box.get(), garage_number_box.get(), car_box.get(), car_number_box.get(),
+                        middle_name_box.get() + " " + first_name_box.get() + "- маълумоти " + education_box.get() + ", <" +
+                        type_license_box.get() + "> тоифадаги автотранспорт хайдовчиси бўлиб, иш стажи " + internship_box.get() +
+                        " йил, " + car_box.get() + " русумли, давлат рақами " + car_number_box.get()]
+                    Condition = False
+                else:
+                    num += 1
 
             # checking whether all entries are full
             if len(first_name_box.get()) == 0:
