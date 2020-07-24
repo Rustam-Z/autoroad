@@ -339,7 +339,7 @@ class MenuBar(tk.Menu):
             for records in masters:
                 if records[0] == variable_master.get():
                     record_selected = records
-            print("Records: " + str(record_selected))
+            # print("Records: " + str(record_selected))
 
             first_name_box.insert(0, record_selected[0].split()[0])
             middle_name_box.insert(0, record_selected[0].split()[1])
@@ -441,13 +441,15 @@ class MenuBar(tk.Menu):
 
             # Opening Excel File
             wbDataBase = xw.Book('DataBase.xlsm')
-
-            # Sheets
             wsDataBase = wbDataBase.sheets['TEACHERS']
+ 
+            record_selected = []
+            for records in masters:
+                if records[0] == variable_master.get():
+                    record_selected = records
+            # print("Records: " + str(record_selected))
 
             # Taking Value and Add into Sheets
-
-            # Bitta usta ma'lumotlari
             Condition = True
             num = 5
             while Condition:
@@ -688,25 +690,6 @@ class MenuBar(tk.Menu):
         self.info_about_frame.pack(fill="both", expand=1)
         p1 = ttk.Label(self.info_about_frame, text="About")
         p1.pack()
-
-    #     teachers_menu = tk.Menu(self, tearoff=False)
-    #     self.add_cascade(label="File", underline=0, menu=teachers_menu)
-    #     teachers_menu.add_command(label="Press-1", underline=1, command=self.press1)
-    #
-    #     groups_menu = tk.Menu(self, tearoff=False)
-    #     self.add_cascade(label="New", underline=0, menu=groups_menu)
-    #     groups_menu.add_command(label="Press-2", underline=1, command=self.press2)
-    #
-    # def press1(self):
-    #     p1 = ttk.Label(self.parent, text="Press-1")
-    #     p1.pack()
-    #
-    # def press2(self):
-    #     p2 = ttk.Label(self.parent, text="Press-2")
-    #     p2.pack()
-    #
-    # def quit(self):
-    #     sys.exit(0)
 
 
 class App(tk.Tk):
