@@ -118,21 +118,23 @@ class MenuBar(tk.Menu):
 
         # =========== Create Main Form To Enter Teachers Form ===========
         # Усталap -- First notebook
-        first_name_label = ttk.Label(instructors_frame, text="Исм").grid(row=1, column=0, padx=10, pady=10)
+        first_name_label = ttk.Label(instructors_frame, text="Исм").grid(row=1, column=0, padx=10)
         middle_name_label = ttk.Label(instructors_frame, text="Фамилия").grid(row=2, column=0, padx=10)
         last_name_label = ttk.Label(instructors_frame, text="Отчество").grid(row=3, column=0, padx=10)
         license_number_label = ttk.Label(instructors_frame, text="Х/Г №").grid(row=4, column=0, padx=10)
         garage_number_label = ttk.Label(instructors_frame, text="Гар. №").grid(row=5, column=0, padx=10)
         car_label = ttk.Label(instructors_frame, text="Марка").grid(row=6, column=0, padx=10)
         car_number_label = ttk.Label(instructors_frame, text="Гос. №").grid(row=7, column=0, padx=10)
-        application_label = ttk.Label(instructors_frame, text="Заявка учун маълумотлар: ").grid(row=8, column=0, padx=10, columnspan=2)
-        education_label = ttk.Label(instructors_frame, text="      Маълумоти     ").grid(row=9, column=0)
+
+        application_label = ttk.Label(instructors_frame, text="Заявка учун маълумотлар: ").grid(row=8, column=0,
+                                                                                                padx=10, columnspan=2)
+        education_label = ttk.Label(instructors_frame, text="Маълумоти").grid(row=9, column=0, padx=10)
         type_license_label = ttk.Label(instructors_frame, text="Tоифа").grid(row=10, column=0, padx=10)
         internship_label = ttk.Label(instructors_frame, text="Стаж").grid(row=11, column=0, padx=10)
 
         # Create Entry Box for the first notebook
         first_name_box = ttk.Entry(instructors_frame)
-        first_name_box.grid(row=1, column=1, pady=3)
+        first_name_box.grid(row=1, column=1, pady=3, padx=7)
         middle_name_box = ttk.Entry(instructors_frame)
         middle_name_box.grid(row=2, column=1, pady=3)
         last_name_box = ttk.Entry(instructors_frame)
@@ -145,6 +147,7 @@ class MenuBar(tk.Menu):
         car_box.grid(row=6, column=1, pady=3)
         car_number_box = ttk.Entry(instructors_frame)
         car_number_box.grid(row=7, column=1, pady=3)
+
         education_box = ttk.Entry(instructors_frame)
         education_box.grid(row=9, column=1, pady=3)
         type_license_box = ttk.Entry(instructors_frame)
@@ -153,22 +156,22 @@ class MenuBar(tk.Menu):
         internship_box.grid(row=11, column=1, pady=3)
 
         # Ўқитувчилар -- Second notebook
-        OptionList_1 = ["Авто.туз/nЙХК", "Тиббий ёрдам"]
-        variable_1 = tk.StringVar(others_frame)
-        variable_1.set(OptionList_1[0])
-        opt_1 = ttk.OptionMenu(others_frame, variable_1, OptionList_1[0], *OptionList_1)
-        opt_1.config(width=24)
-        opt_1.grid(row=0, column=0, pady=5, columnspan=2)
-
         t_first_name_label = ttk.Label(others_frame, text="Исм").grid(row=1, column=0, padx=10)
         t_middle_name_label = ttk.Label(others_frame, text="Фамилия").grid(row=2, column=0, padx=10)
         t_last_name_label = ttk.Label(others_frame, text="Отчество").grid(row=3, column=0, padx=10)
         t_education_label = ttk.Label(others_frame, text="Маълумоти").grid(row=4, column=0, padx=10)
         t_specialization_label = ttk.Label(others_frame, text="Мутахасислиги").grid(row=5, column=0, padx=10)
 
+        OptionList = [
+            "Aвто. туз.",
+            "Taurus",
+            "Gemini",
+            "Cancer"
+        ]
+
         # Create Entry Box for the first notebook
         t_first_name_box = ttk.Entry(others_frame)
-        t_first_name_box.grid(row=1, column=1, pady=3, padx=10)
+        t_first_name_box.grid(row=1, column=1, pady=3, padx=7)
         t_middle_name_box = ttk.Entry(others_frame)
         t_middle_name_box.grid(row=2, column=1, pady=3)
         t_last_name_box = ttk.Entry(others_frame)
@@ -196,7 +199,7 @@ class MenuBar(tk.Menu):
             Condition = True
             num = 5
             while Condition:
-                if wsDataBase.cells(num, "B").value is None:
+                if wsDataBase.cells(num, "B").value == None:
                     wsDataBase.cells(num, "B").value = [
                         middle_name_box.get() + " " + first_name_box.get() + " " + last_name_box.get(),
                         license_number_box.get(), garage_number_box.get(), car_box.get(), car_number_box.get(),
@@ -245,6 +248,11 @@ class MenuBar(tk.Menu):
             type_license_box.delete(0, END)
             internship_box.delete(0, END)
 
+            # if len(entry_list) == 10:
+            #     messagebox.showinfo("Success message", "Teacher has been added in database successfully!")
+            # else:
+            #     messagebox.showwarning("Warning message!", "Please fill all entries!")
+
         def db_others_add():
             # checking whether all entries are full
             if len(t_first_name_box.get()) == 0:
@@ -291,80 +299,49 @@ class MenuBar(tk.Menu):
 
         # add the notebooks
         teachers_edit_notebook.add(instructors_edit_frame, text="Усталapни Янгилаш")
-        teachers_edit_notebook.add(others_edit_frame, text="Ўқит-ни Янгилаш")
+        teachers_edit_notebook.add(others_edit_frame, text="Ўқитувчиларни Янгилаш")
 
         # =========================== EXCEL ============================
         # Opening Excel File
         wbDataBase = xw.Book('DataBase.xlsm')
+
+        # Sheets
         wsDataBase = wbDataBase.sheets['TEACHERS']
 
         # Taking data from excel as list
         Condition = True
         num = 5
-        master = []
+        Usta = []
         while Condition:
-            if wsDataBase.cells(num, "B").value is not None:
-                master.append(wsDataBase.cells(num, "B").value)
-                master.append(wsDataBase.cells(num, "C").value)
-                master.append(wsDataBase.cells(num, "D").value)
-                master.append(wsDataBase.cells(num, "E").value)
-                master.append(wsDataBase.cells(num, "F").value)
+            if wsDataBase.cells(num, "B").value != None:
+                Usta.append(wsDataBase.cells(num, "B").value)
+                Usta.append(wsDataBase.cells(num, "C").value)
+                Usta.append(wsDataBase.cells(num, "D").value)
+                Usta.append(wsDataBase.cells(num, "E").value)
+                Usta.append(wsDataBase.cells(num, "F").value)
                 num += 1
             else:
                 Condition = False
 
-        masters = [master[x:x + 5] for x in range(0, len(master), 5)]
-        # print("Masters: " + str(masters))
+        Ustalar = [Usta[x:x + 5] for x in range(0, len(Usta), 5)]
+        # ===========================NOT EXCEL==============================
 
         # =========== Create Main Form To Enter Teachers Form ===========
-        # Усталap -- First notebook -- 
+        # Усталap -- First notebook
         # Option list for the "Усталap" -- the data comes from excel db
 
-        # global functoin for the Option Menu
-        def option_menu_test(*args):
-            # removing the old data from cells
-            first_name_box.delete(0, END)
-            middle_name_box.delete(0, END)
-            last_name_box.delete(0, END)
-            license_number_box.delete(0, END)
-            garage_number_box.delete(0, END)
-            car_box.delete(0, END)
-            car_number_box.delete(0, END)
-            education_box.delete(0, END)
-            type_license_box.delete(0, END)
-            internship_box.delete(0, END)
-            # print(variable_master.get())
-
-            record_selected = []
-            for records in masters:
-                if records[0] == variable_master.get():
-                    record_selected = records
-            print("Records: " + str(record_selected))
-
-            first_name_box.insert(0, record_selected[0].split()[0])
-            middle_name_box.insert(0, record_selected[0].split()[1])
-            last_name_box.insert(0, record_selected[0].split()[2])
-            license_number_box.insert(0, (record_selected[1]))
-            garage_number_box.insert(0, (record_selected[2]))
-            car_box.insert(0, (record_selected[3]))
-            car_number_box.insert(0, (record_selected[4]))
-            education_box.insert(0, " ")
-            type_license_box.insert(0, " ")
-            internship_box.insert(0, " ")
-
-        
+        # Taking List from === Excel ===
         OptionListForInstructors = []
-        for pos in range(len(masters)):
-            OptionListForInstructors.append(masters[pos][0])
+        for pos in range(len(Ustalar)):
+            OptionListForInstructors.append(Ustalar[pos][0])
+        # =======not excel==========
 
-        # print(OptionListForInstructors)
+        variable = tk.StringVar(instructors_edit_frame)
+        variable.set(OptionListForInstructors[0])
 
-        variable_master = tk.StringVar(instructors_edit_frame)
-        variable_master.set(OptionListForInstructors[0])
-
-        opt = ttk.OptionMenu(instructors_edit_frame, variable_master, OptionListForInstructors[0], *OptionListForInstructors, command=option_menu_test)
+        opt = ttk.OptionMenu(instructors_edit_frame, variable, OptionListForInstructors[0], *OptionListForInstructors)
         opt.config(width=30)
-        opt.grid(row=0, column=0, columnspan=2, pady=5)
+        opt.grid(row=0, column=0, columnspan=2, padx=10, pady=10)
 
         first_name_label = ttk.Label(instructors_edit_frame, text="Исм").grid(row=1, column=0, padx=10)
         middle_name_label = ttk.Label(instructors_edit_frame, text="Фамилия").grid(row=2, column=0, padx=10)
@@ -373,8 +350,11 @@ class MenuBar(tk.Menu):
         garage_number_label = ttk.Label(instructors_edit_frame, text="Гар. №").grid(row=5, column=0, padx=10)
         car_label = ttk.Label(instructors_edit_frame, text="Марка").grid(row=6, column=0, padx=10)
         car_number_label = ttk.Label(instructors_edit_frame, text="Гос. №").grid(row=7, column=0, padx=10)
-        application_label = ttk.Label(instructors_edit_frame, text="Заявка учун маълумотлар: ").grid(row=8, column=0, padx=10,columnspan=2)
-        education_label = ttk.Label(instructors_edit_frame, text="Маълумоти ").grid(row=9, column=0, padx=20)
+
+        application_label = ttk.Label(instructors_edit_frame, text="Заявка учун маълумотлар: ").grid(row=8, column=0,
+                                                                                                     padx=10,
+                                                                                                     columnspan=2)
+        education_label = ttk.Label(instructors_edit_frame, text="Маълумоти").grid(row=9, column=0, padx=10)
         type_license_label = ttk.Label(instructors_edit_frame, text="Tоифа").grid(row=10, column=0, padx=10)
         internship_label = ttk.Label(instructors_edit_frame, text="Стаж").grid(row=11, column=0, padx=10)
 
@@ -401,31 +381,27 @@ class MenuBar(tk.Menu):
         internship_box = ttk.Entry(instructors_edit_frame)
         internship_box.grid(row=11, column=1, pady=3)
 
-        # =============================================================
+        # =============================EXCEL================================
         # Getting the old data from db and showing it on screen
         # select * from the given variable.get() and then create a list of data
+        record_selected = []
+        for records in Ustalar:
+            if records[0] == variable.get():
+                record_selected = records
 
-        # def callback(*args):
-        #     # labelTest.configure(text="The selected item is {}".format(variable.get()))
-        #     print(variable_master.get())
-        #     record_selected = []
-        #     for records in masters:
-        #         if records[0] == variable_master.get():
-        #             record_selected = records
-        #     print("Records: " + str(record_selected))
+        # Loop thru results
 
-        #     #first_name_box.insert(0, (record_selected[0].split()[0])[:len(record_selected[0].split()[0])//2]
-        #     # middle_name_box.insert(0, len(record_selected[0].split()[1])/2)
-        #     # last_name_box.insert(0, len(record_selected[0].split()[2])/2)
-        #     # license_number_box.insert(0, len(str(record_selected[1]))/2)
-        #     # garage_number_box.insert(0, len(str(record_selected[2]))/2)
-        #     # car_box.insert(0, len(str(record_selected[3]))/2)
-        #     # car_number_box.insert(0, len(str(record_selected[4]))/2)
-        #     # education_box.insert(0, " ")
-        #     # type_license_box.insert(0, " ")
-        #     # internship_box.insert(0, " ")
-    
-        # variable_master.trace("w", callback) # write
+        first_name_box.insert(0, record_selected[0].split()[0])
+        middle_name_box.insert(0, record_selected[0].split()[1])
+        last_name_box.insert(0, record_selected[0].split()[2])
+        license_number_box.insert(0, record_selected[1])
+        garage_number_box.insert(0, record_selected[2])
+        car_box.insert(0, record_selected[3])
+        car_number_box.insert(0, record_selected[4])
+        education_box.insert(0, " ")
+        type_license_box.insert(0, " ")
+        internship_box.insert(0, " ")
+        # ===============================NOT EXCEL====================================
 
         # Ўқитувчилар -- Second notebook
         # Option List for the "Ўқитувчилар" -- the data comes from the database
@@ -441,7 +417,7 @@ class MenuBar(tk.Menu):
 
         opt = ttk.OptionMenu(others_edit_frame, variable, OptionListForOthers[0], *OptionListForOthers)
         opt.config(width=30)
-        opt.grid(row=0, column=0, columnspan=2, padx=10, pady=5)
+        opt.grid(row=0, column=0, columnspan=2, padx=10, pady=10)
         t_first_name_label = ttk.Label(others_edit_frame, text="Исм").grid(row=1, column=0, padx=10)
         t_middle_name_label = ttk.Label(others_edit_frame, text="Фамилия").grid(row=2, column=0, padx=10)
         t_last_name_label = ttk.Label(others_edit_frame, text="Отчество").grid(row=3, column=0, padx=10)
@@ -464,6 +440,32 @@ class MenuBar(tk.Menu):
         def db_teachers_edit():
             entry_list = [child for child in instructors_edit_frame.winfo_children()
                           if isinstance(child, ttk.Entry)]
+
+            # =========================== EXCEL ============================
+            # Opening Excel File
+            wbDataBase = xw.Book('DataBase.xlsm')
+
+            # Sheets
+            wsDataBase = wbDataBase.sheets['TEACHERS']
+
+            # Taking Value and Add into Sheets
+
+            # Bitta usta ma'lumotlari
+            Condition = True
+            num = 5
+            while Condition:
+                if wsDataBase.cells(num, "B").value == record_selected[0]:
+                    wsDataBase.cells(num, "B").value = [
+                        middle_name_box.get() + " " + first_name_box.get() + " " + last_name_box.get(),
+                        license_number_box.get(), garage_number_box.get(), car_box.get(), car_number_box.get(),
+                        middle_name_box.get() + " " + first_name_box.get() + "- маълумоти " + education_box.get() + ", <" +
+                        type_license_box.get() + "> тоифадаги автотранспорт хайдовчиси бўлиб, иш стажи " + internship_box.get() +
+                        " йил, " + car_box.get() + " русумли, давлат рақами " + car_number_box.get()]
+                    Condition = False
+                else:
+                    num += 1
+
+            # ===========================NOT EXCEL==============================
 
             # checking whether all entries are full
             if len(first_name_box.get()) == 0:
@@ -500,6 +502,11 @@ class MenuBar(tk.Menu):
             education_box.delete(0, END)
             type_license_box.delete(0, END)
             internship_box.delete(0, END)
+
+            # if len(entry_list) == 10:
+            #     messagebox.showinfo("Success message", "Teacher has been added in database successfully!")
+            # else:
+            #     messagebox.showwarning("Warning message!", "Please fill all entries!")
 
         def db_others_edit():
             # checking whether all entries are full
@@ -664,8 +671,6 @@ class MenuBar(tk.Menu):
         opt = ttk.OptionMenu(groups_inside_frame, variable, OptionList_doctor[0], *OptionList_doctor)
         opt.config(width=16)
         opt.grid(row=4, column=3, padx=10, pady=10)
-
-        # Masters
 
     def groups_edit(self):
         self.hide_all_frames()
