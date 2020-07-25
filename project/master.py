@@ -11,23 +11,28 @@ class MenuBar(tk.Menu):
         tk.Menu.__init__(self, master)
         self.master = master
 
+        # Create a Menu Item for Database 
+        database_menu = tk.Menu(self, tearoff=False)
+
         # Create a Menu Item for Teachers
         teachers_menu = tk.Menu(self, tearoff=False)
 
         # Create a Menu Item for Groups
         groups_menu = tk.Menu(self, tearoff=False)
 
-        # Create a Menu Item for Students
-        students_menu = tk.Menu(self, tearoff=False)
-
         # Create a Menu Item for Info --EightSoft dev
         info_menu = tk.Menu(self, tearoff=False)
 
         # Add the cascades for menu bar
+        self.add_cascade(label="Mаълумотлар базаси", menu=database_menu)
         self.add_cascade(label="Ўқитувчилар", menu=teachers_menu)
         self.add_cascade(label="Гуруҳ", menu=groups_menu)
-        self.add_cascade(label="Ўқувчилар", menu=students_menu)
         self.add_cascade(label="Инфо", menu=info_menu)
+
+        # Database
+        database_menu.add_command(label="Барча гуруҳлар рўйхати", command=self.db_groups)
+        database_menu.add_command(label="Барча ўқувчилар рўйхати", command=self.db_students)
+        database_menu.add_command(label="Барча ўқитувчилар рўйхати", command=self.db_teachers)
 
         # Teachers
         teachers_menu.add_command(label="Қўшиш", command=self.teachers_add)
@@ -39,14 +44,15 @@ class MenuBar(tk.Menu):
         groups_menu.add_command(label="Янгилаш", command=self.groups_edit)
         groups_menu.add_command(label="Ўчириш", command=self.groups_delete)
 
-        # Students
-        students_menu.add_command(label="Mаълумотлар базаси", command=self.students_db)
-
         # Info
         info_menu.add_command(label="Илова ҳақида", command=self.info_about)
         info_menu.add_separator()
 
         # Create frames for each new window --MenuBar-Cascade-Commands
+        self.db_groups_frame = ttk.Frame(master)
+        self.db_students_frame = ttk.Frame(master)
+        self.db_teachers_frame = ttk.Frame(master)
+
         self.teachers_add_frame = ttk.Frame(master)
         self.teachers_edit_frame = ttk.Frame(master)
         self.teachers_delete_frame = ttk.Frame(master)
@@ -55,13 +61,20 @@ class MenuBar(tk.Menu):
         self.groups_edit_frame = ttk.Frame(master)
         self.groups_delete_frame = ttk.Frame(master)
 
-        self.students_db_frame = ttk.Frame(master)
-
         self.info_about_frame = ttk.Frame(master)
 
     # Hide the frames when you switch the menu
     def hide_all_frames(self):
         """Cleans the screen after pressing the menu item"""
+        for widget in self.db_groups_frame.winfo_children():
+            widget.destroy()
+
+        for widget in self.db_students_frame.winfo_children():
+            widget.destroy()
+
+        for widget in self.db_teachers_frame.winfo_children():
+            widget.destroy()
+
         for widget in self.teachers_add_frame.winfo_children():
             widget.destroy()
 
@@ -80,19 +93,18 @@ class MenuBar(tk.Menu):
         for widget in self.groups_delete_frame.winfo_children():
             widget.destroy()
 
-        for widget in self.students_db_frame.winfo_children():
-            widget.destroy()
-
         for widget in self.info_about_frame.winfo_children():
             widget.destroy()
 
+        self.db_groups_frame.pack_forget()
+        self.db_students_frame.pack_forget()
+        self.db_teachers_frame.pack_forget()
         self.teachers_add_frame.pack_forget()
         self.teachers_edit_frame.pack_forget()
         self.teachers_delete_frame.pack_forget()
         self.groups_add_frame.pack_forget()
         self.groups_edit_frame.pack_forget()
         self.groups_delete_frame.pack_forget()
-        self.students_db_frame.pack_forget()
         self.info_about_frame.pack_forget()
 
     # Create methods for Teachers
@@ -118,7 +130,7 @@ class MenuBar(tk.Menu):
 
         # =========== Create Main Form To Enter Teachers Form ===========
         # Усталap -- First notebook
-        first_name_label = ttk.Label(instructors_frame, text="Исм").grid(row=1, column=0, padx=10, pady=10)
+        first_name_label = ttk.Label(instructors_frame, text="Исм").grid(row=1, column=0, padx=10, pady=5)
         middle_name_label = ttk.Label(instructors_frame, text="Фамилия").grid(row=2, column=0, padx=10)
         last_name_label = ttk.Label(instructors_frame, text="Отчество").grid(row=3, column=0, padx=10)
         license_number_label = ttk.Label(instructors_frame, text="Х/Г №").grid(row=4, column=0, padx=10)
@@ -721,12 +733,25 @@ class MenuBar(tk.Menu):
         p1 = ttk.Label(self.groups_delete_frame, text="Groups Delete")
         p1.pack()
 
-    # Create methods for Students
-    def students_db(self):
+    # Create methods for Database
+    def db_groups(self):
         self.hide_all_frames()
-        self.students_db_frame.pack(fill="both", expand=1)
-        p1 = ttk.Label(self.students_db_frame, text="Students Database")
+        self.db_groups_frame.pack(fill="both", expand=1)
+        p1 = ttk.Label(self.db_groups_frame, text="Groups Database")
         p1.pack()
+
+    def db_students(self):
+        self.hide_all_frames()
+        self.db_students_frame.pack(fill="both", expand=1)
+        p1 = ttk.Label(self.db_students_frame, text="Students Database")
+        p1.pack()
+
+    def db_teachers(self):
+        self.hide_all_frames()
+        self.db_teachers_frame.pack(fill="both", expand=1)
+        p1 = ttk.Label(self.db_teachers_frame, text="Teachers Database")
+        p1.pack()
+
 
     def info_about(self):
         self.hide_all_frames()
