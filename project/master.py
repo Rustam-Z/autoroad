@@ -432,21 +432,55 @@ class MenuBar(tk.Menu):
         internship_box.grid(row=11, column=1, pady=3)
 
         # "Ўқитувчилар" -- Second notebook
-        OptionListForOthers = [
-            "Umarov",
-            "Shavkatov",
-            "Usmanov",
-            "Rustamov"
-        ]
+                # Ikkinchi Notebook
+        Condition_2 = True
+        num = 5
+        master_2 = []
+        while Condition_2:
+            if wsDataBase.cells(num, "I").value is not None:
+                master_2.append(wsDataBase.cells(num, "I").value)
+                master_2.append(wsDataBase.cells(num, "G").value)
+                master_2.append(wsDataBase.cells(num, "K").value)
+                master_2.append(wsDataBase.cells(num, "L").value)
+                num += 1
+            else:
+                Condition_2 = False
 
-         # Cheack whether the list is empty
+        masters_2 = [master_2[x:x + 4] for x in range(0, len(master_2), 4)]
+
+        def option_menu_test2(*args):
+            # Remove the old data from cells
+            t_first_name_box.delete(0, END)
+            t_middle_name_box.delete(0, END)
+            t_last_name_box.delete(0, END)
+            t_education_box.delete(0, END)
+            t_specialization_box.delete(0, END)
+            # print(variable_master.get())
+
+            record_selected = []
+            for records in masters_2:
+                if records[0] == variable_others.get():
+                    record_selected = records
+            # print("Records: " + str(record_selected))
+
+            t_first_name_box.insert(0, record_selected[0].split()[0])
+            t_middle_name_box.insert(0, record_selected[0].split()[1])
+            t_last_name_box.insert(0, record_selected[0].split()[2])
+            t_education_box.insert(0, "-")
+            t_specialization_box.insert(0,'-')
+
+        OptionListForOthers = []
+        for pos in range(len(masters_2)):
+            OptionListForOthers.append(masters_2[pos][0])
+
+        # Cheack whether the list is empty
         if len(OptionListForOthers) == 0:
             messagebox.showwarning("Огоҳлантириш хабари!", "Илтимос, аввал ўқитувчиларни маълумотлар базасига қўшинг!")
 
         variable_others = tk.StringVar(others_edit_frame)
         variable_others.set(OptionListForOthers[0])
 
-        opt_o = ttk.OptionMenu(others_edit_frame, variable_others, OptionListForOthers[0], *OptionListForOthers)
+        opt_o = ttk.OptionMenu(others_edit_frame, variable_others, OptionListForOthers[0], *OptionListForOthers, command=option_menu_test2)
         opt_o.config(width=30)
         opt_o.grid(row=0, column=0, columnspan=2, padx=10, pady=5)
 
@@ -471,15 +505,10 @@ class MenuBar(tk.Menu):
 
         # Functions which add a teacher to db
         def db_teachers_edit():
-            # Opening Excel File
-            wbDataBase = xw.Book('DataBase.xlsm')
-            wsDataBase = wbDataBase.sheets['TEACHERS']
- 
             record_selected = []
             for records in masters:
                 if records[0] == variable_master.get():
                     record_selected = records
-            # print("Records: " + str(record_selected))
 
             # checking whether all entries are full
             if len(first_name_box.get()) == 0:
@@ -532,6 +561,11 @@ class MenuBar(tk.Menu):
             internship_box.delete(0, END)
 
         def db_others_edit():
+            record_selected = []
+            for records in masters_2:
+                if records[0] == variable_others.get():
+                    record_selected = records
+
             # checking whether all entries are full
             if len(t_first_name_box.get()) == 0:
                 messagebox.showwarning("Огоҳлантириш хабари!", "Илтимос, барча ёзувларни тўлдиринг!")
@@ -544,6 +578,20 @@ class MenuBar(tk.Menu):
             elif len(t_specialization_box.get()) == 0:
                 messagebox.showwarning("Огоҳлантириш хабари!", "Илтимос, барча ёзувларни тўлдиринг!")
             else:
+                Condition_2 = True
+                num = 5
+                while Condition_2:
+                    if wsDataBase.cells(num, "I").value == record_selected[0]:
+                        wsDataBase.cells(num, "I").value = [
+                            t_first_name_box.get()+" "+t_middle_name_box.get()+" "+t_last_name_box.get(),
+                            "Автотранспорт воситаларининг тузилиши ва техник хизмат кўрсатиш фанидан: " +
+                            t_first_name_box.get()+" "+t_middle_name_box.get()+" маълумоти "+
+                            t_education_box.get()+" , мутахасислиги- "+ t_specialization_box.get()+""
+                        ]
+                        Condition_2 = False
+                    else:
+                        num += 1
+
                 messagebox.showinfo("Муваффақият хабари", "Ўқитувчи маълумотлар базасидан муваффақиятли янгиланди!")
 
             # removing the old data from cells
