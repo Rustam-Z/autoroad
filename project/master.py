@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import ttk  # Normal Tkinter.* widgets are not themed!
-from ttkthemes import ThemedStyle
+# from ttkthemes import ThemedStyle
 from tkinter import messagebox, END
 from tkcalendar import DateEntry
 import xlwings as xw
@@ -567,6 +567,7 @@ class MenuBar(tk.Menu):
         self.hide_all_frames()
         self.groups_add_frame.pack(fill="both", expand=1)
 
+        # FRONTEND STARTS
         # Creating a Notebook
         groups_notebook = ttk.Notebook(self.groups_add_frame)
         groups_notebook.pack(pady=10, padx=10)
@@ -584,12 +585,10 @@ class MenuBar(tk.Menu):
         groups_number_entry.grid(row=0, column=1, padx=5, pady=10)
 
         first_name_label = ttk.Label(groups_inside_frame, text="Тоифа").grid(row=0, column=2, padx=10)
-        OptionList_Type = [
-            "BC", "A", "B", "C", "D", "BE", "CE", "DE"
-        ]
-        variable = tk.StringVar(groups_inside_frame)
-        variable.set(OptionList_Type[0])
-        opt = ttk.OptionMenu(groups_inside_frame, variable, OptionList_Type[0], *OptionList_Type)
+        OptionList_Type = ["BC", "A", "B", "C", "D", "BE", "CE", "DE"]
+        variable_type = tk.StringVar(groups_inside_frame)
+        variable_type.set(OptionList_Type[0])
+        opt = ttk.OptionMenu(groups_inside_frame, variable_type, OptionList_Type[0], *OptionList_Type)
         opt.config(width=16)
         opt.grid(row=0, column=3, padx=10, pady=10)
 
@@ -603,63 +602,112 @@ class MenuBar(tk.Menu):
         cal.grid(row=1, column=3, padx=10, pady=10)
         # print(cal.get_date())
 
-        lecture_duration_label = ttk.Label(groups_inside_frame, text="Назарий машғулот\n          соати").grid(row=2,
-                                                                                                               column=0,
-                                                                                                               padx=10)
+        lecture_duration_label = ttk.Label(groups_inside_frame, text="Назарий машғулот\n          соати").grid(row=2, column=0, padx=10)
         OptionList_L_start = ["6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "17", "18", "19", "20"]
-        variable = tk.StringVar(groups_inside_frame)
-        variable.set(OptionList_L_start[0])
-        opt = ttk.OptionMenu(groups_inside_frame, variable, OptionList_L_start[0], *OptionList_L_start)
+        variable_l_start = tk.StringVar(groups_inside_frame)
+        variable_l_start.set(OptionList_L_start[0])
+        opt = ttk.OptionMenu(groups_inside_frame, variable_l_start, OptionList_L_start[0], *OptionList_L_start)
         opt.config(width=16)
         opt.grid(row=2, column=1, padx=10, pady=10)
 
         lecture_duration_label_2 = ttk.Label(groups_inside_frame, text="дан / гача").grid(row=2, column=2, padx=5)
         OptionList_L_finish = ["6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "17", "18", "19", "20"]
-        variable = tk.StringVar(groups_inside_frame)
-        variable.set(OptionList_L_finish[0])
-        opt = ttk.OptionMenu(groups_inside_frame, variable, OptionList_L_finish[0], *OptionList_L_finish)
+        variable_l_finish = tk.StringVar(groups_inside_frame)
+        variable_l_finish.set(OptionList_L_finish[0])
+        opt = ttk.OptionMenu(groups_inside_frame, variable_l_finish, OptionList_L_finish[0], *OptionList_L_finish)
         opt.config(width=16)
         opt.grid(row=2, column=3, padx=10, pady=10)
 
-        practice_duration_label = ttk.Label(groups_inside_frame, text="Амалий машғулот\n         соати").grid(row=3,
-                                                                                                              column=0,
-                                                                                                              padx=10)
+        practice_duration_label = ttk.Label(groups_inside_frame, text="Амалий машғулот\n         соати").grid(row=3, column=0, padx=10)
         OptionList_P_start = ["6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "17", "18", "19", "20"]
-        variable = tk.StringVar(groups_inside_frame)
-        variable.set(OptionList_P_start[0])
-        opt = ttk.OptionMenu(groups_inside_frame, variable, OptionList_P_start[0], *OptionList_P_start)
+        variable_p_start = tk.StringVar(groups_inside_frame)
+        variable_p_start.set(OptionList_P_start[0])
+        opt = ttk.OptionMenu(groups_inside_frame, variable_p_start, OptionList_P_start[0], *OptionList_P_start)
         opt.config(width=16)
         opt.grid(row=3, column=1, padx=10, pady=10)
 
         practice_duration_label_2 = ttk.Label(groups_inside_frame, text="дан / гача").grid(row=3, column=2, padx=5)
         OptionList_P_finish = ["6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "17", "18", "19", "20"]
-        variable = tk.StringVar(groups_inside_frame)
-        variable.set(OptionList_P_finish[0])
-        opt = ttk.OptionMenu(groups_inside_frame, variable, OptionList_P_finish[0], *OptionList_P_finish)
+        variable_p_finish = tk.StringVar(groups_inside_frame)
+        variable_p_finish.set(OptionList_P_finish[0])
+        opt = ttk.OptionMenu(groups_inside_frame, variable_p_finish, OptionList_P_finish[0], *OptionList_P_finish)
         opt.config(width=16)
         opt.grid(row=3, column=3, padx=10, pady=10)
 
         teacher_name_label = ttk.Label(groups_inside_frame, text="    Ўқитувчи\nАвто.туз, ЙХК").grid(row=4, column=0)
         OptionList_Teacher = [
-            "Alimov", "Zokirov"
+            "Teacher", "Alimov", "Zokirov"
         ]
-        variable = tk.StringVar(groups_inside_frame)
-        variable.set(OptionList_Teacher[0])
-        opt = ttk.OptionMenu(groups_inside_frame, variable, OptionList_Teacher[0], *OptionList_Teacher)
+        variable_teacher_name = tk.StringVar(groups_inside_frame)
+        variable_teacher_name.set(OptionList_Teacher[0])
+        opt = ttk.OptionMenu(groups_inside_frame, variable_teacher_name, OptionList_Teacher[0], *OptionList_Teacher)
         opt.config(width=16)
         opt.grid(row=4, column=1, padx=10, pady=10)
 
         doctor_name_label = ttk.Label(groups_inside_frame, text="    Ўқитувчи\nТиббий ёрдам").grid(row=4, column=2)
         OptionList_doctor = [
-            "Alimov", "Zokirov"
+            "Doctor", "Alimov", "Zokirov"
         ]
-        variable = tk.StringVar(groups_inside_frame)
-        variable.set(OptionList_doctor[0])
-        opt = ttk.OptionMenu(groups_inside_frame, variable, OptionList_doctor[0], *OptionList_doctor)
+        variable_doctor_name = tk.StringVar(groups_inside_frame)
+        variable_doctor_name.set(OptionList_doctor[0])
+        opt = ttk.OptionMenu(groups_inside_frame, variable_doctor_name, OptionList_doctor[0], *OptionList_doctor)
         opt.config(width=16)
         opt.grid(row=4, column=3, padx=10, pady=10)
 
         # Masters
+        OptionList_Masrer = [
+            "Master", "Alimov", "Zokirov", "1", "2", "3", "4"
+        ]
+        o_vars = []
+
+        ttk.Label(groups_inside_frame, text="Уста Ўргатувчи").grid(row=5, column=0)
+
+        for i in range(3):
+            variable_masters = tk.StringVar(groups_inside_frame)
+            variable_masters.set(OptionList_Masrer[0])
+            o_vars.append(variable_masters)
+            opt = ttk.OptionMenu(groups_inside_frame, variable_masters, OptionList_Masrer[0], *OptionList_Masrer)
+            opt.config(width=16)
+            opt.grid(row=5, column=1+i, pady=10)
+        
+        # FRONTEND ENDS
+        def db_groups_add():
+            masters_counter = 0
+            for i, var in enumerate(o_vars):
+                masters_counter += 1
+                # print(var.get())
+
+            # checking whether all entries are full
+            if len(groups_number_entry.get()) == 0:
+                messagebox.showwarning("Огоҳлантириш хабари!", "Илтимос, барча ёзувларни тўлдиринг!")
+            elif len(variable_type.get()) == 0:
+                messagebox.showwarning("Огоҳлантириш хабари!", "Илтимос, барча ёзувларни тўлдиринг!")
+            elif len(time_duration_entry.get()) == 0:
+                messagebox.showwarning("Огоҳлантириш хабари!", "Илтимос, барча ёзувларни тўлдиринг!")
+            elif len(variable_l_start.get()) == 0:
+                messagebox.showwarning("Огоҳлантириш хабари!", "Илтимос, барча ёзувларни тўлдиринг!")
+            elif len(variable_l_finish.get()) == 0:
+                messagebox.showwarning("Огоҳлантириш хабари!", "Илтимос, барча ёзувларни тўлдиринг!")
+            elif len(variable_p_start.get()) == 0:
+                messagebox.showwarning("Огоҳлантириш хабари!", "Илтимос, барча ёзувларни тўлдиринг!")
+            elif len(variable_p_finish.get()) == 0:
+                messagebox.showwarning("Огоҳлантириш хабари!", "Илтимос, барча ёзувларни тўлдиринг!")
+            elif len(variable_teacher_name.get()) == 0:
+                messagebox.showwarning("Огоҳлантириш хабари!", "Илтимос, барча ёзувларни тўлдиринг!")
+            elif len(variable_doctor_name.get()) == 0:
+                messagebox.showwarning("Огоҳлантириш хабари!", "Илтимос, барча ёзувларни тўлдиринг!")
+            elif masters_counter == 0:
+                messagebox.showwarning("Огоҳлантириш хабари!", "Илтимос, барча ёзувларни тўлдиринг!")
+            else:
+                messagebox.showinfo("Муваффақият хабари", "Ўқитувчи маълумотлар базасига муваффақиятли қўшилди!")
+
+            # removing the old data from cells
+            groups_number_entry.delete(0, END)
+            time_duration_entry.delete(0, END)
+        
+        # Button for saving the info into db
+        groups_add = ttk.Button(groups_inside_frame, text="Маълумотлар базасига қўшиш", command=db_groups_add)
+        groups_add.grid(row=6, column=1, columnspan=2, pady=5)
 
     def groups_edit(self):
         self.hide_all_frames()
@@ -699,7 +747,7 @@ class App(tk.Tk):
 if __name__ == "__main__":
     app = App(None)
     app.title("AutoRoad")
-    app.geometry("600x550+250+100")
-    style = ThemedStyle(app)
-    style.set_theme("breeze")
+    app.geometry("650x550+250+100")
+    # style = ThemedStyle(app)
+    # style.set_theme("breeze")
     app.mainloop()
