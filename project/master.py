@@ -450,13 +450,14 @@ class MenuBar(tk.Menu):
         opt_o.config(width=30)
         opt_o.grid(row=0, column=0, columnspan=2, padx=10, pady=5)
 
+        # Create Lables for the second notebook
         t_first_name_label = ttk.Label(others_edit_frame, text="Исм").grid(row=1, column=0, padx=10)
         t_middle_name_label = ttk.Label(others_edit_frame, text="Фамилия").grid(row=2, column=0, padx=10)
         t_last_name_label = ttk.Label(others_edit_frame, text="Отчество").grid(row=3, column=0, padx=10)
         t_education_label = ttk.Label(others_edit_frame, text="Маълумоти").grid(row=4, column=0, padx=10)
         t_specialization_label = ttk.Label(others_edit_frame, text="Мутахасислиги").grid(row=5, column=0, padx=10)
 
-        # Create Entry Box for the first notebook
+        # Create Entry Box for the second notebook
         t_first_name_box = ttk.Entry(others_edit_frame)
         t_first_name_box.grid(row=1, column=1, pady=3, padx=7)
         t_middle_name_box = ttk.Entry(others_edit_frame)
@@ -1032,17 +1033,36 @@ class MenuBar(tk.Menu):
             top_notebook.add(add_frame, text="Ўқувчини Қўшиш")
             top_notebook.add(edit_frame, text="Ўқувчини Янгилаш")
             top_notebook.add(delete_frame, text="Ўқувчини Ўчириш")
-
+            
+            # ===================== 1-1-1 docs start ====================
+            # Addding the widgets to the first doc frame
             # Printing functions - Conncect with Printer
             def print_doc1():
                 messagebox.showwarning("Info!", "Printing ... !")
 
-            # Addding the widgets to the first doc frame
             # create listbox object
             ttk.Label(doc_frame, text="Doc 1").grid(row=0, column=0, padx=10, pady=5)
             doc1 = ttk.Button(doc_frame, text="Print", command=print_doc1)
             doc1.grid(row=0, column=1, padx=10, pady=5)
-        
+            # ===================== 1-1-1 docs end =======================
+
+            # ===================== 2-2-2 adding start ===================
+            ttk.Label(add_frame, text="Name").grid(row=0, column=0, padx=10, pady=5)
+
+
+            # ===================== 2-2-2 adding end =====================
+
+            # ===================== 3-3-3 editing start ==================
+            ttk.Label(edit_frame, text="222").grid(row=0, column=0, padx=10, pady=5)
+
+
+            # ===================== 3-3-3 editing end ====================
+
+            # ===================== 4-4-4 deleting start =================
+            ttk.Label(delete_frame, text="333").grid(row=0, column=0, padx=10, pady=5)
+
+
+            # ===================== 4-4-4 deleting end ===================
     
         # Ending part - Opening a new window
         files_list_box.bind("<<ListboxSelect>>", show_content)
