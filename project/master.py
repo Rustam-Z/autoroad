@@ -153,7 +153,7 @@ class MenuBar(tk.Menu):
         internship_box.grid(row=11, column=1, pady=3)
 
         # Ўқитувчилар -- Second notebook
-        OptionList_1 = ["Авто.туз/nЙХК", "Тиббий ёрдам"]
+        OptionList_1 = ["Авто.туз & ЙХК", "Тиббий ёрдам"]
         variable_1 = tk.StringVar(others_frame)
         variable_1.set(OptionList_1[0])
         opt_1 = ttk.OptionMenu(others_frame, variable_1, OptionList_1[0], *OptionList_1)
@@ -186,28 +186,7 @@ class MenuBar(tk.Menu):
             # =========================== EXCEL ============================
             # Opening Excel File
             wbDataBase = xw.Book('DataBase.xlsm')
-
-            # Sheets
             wsDataBase = wbDataBase.sheets['TEACHERS']
-
-            # Taking Value and Add into Sheets
-
-            # Bitta usta ma'lumotlari
-            Condition = True
-            num = 5
-            while Condition:
-                if wsDataBase.cells(num, "B").value is None:
-                    wsDataBase.cells(num, "B").value = [
-                        middle_name_box.get() + " " + first_name_box.get() + " " + last_name_box.get(),
-                        license_number_box.get(), garage_number_box.get(), car_box.get(), car_number_box.get(),
-                        middle_name_box.get() + " " + first_name_box.get() + "- маълумоти " + education_box.get() + ", <" +
-                        type_license_box.get() + "> тоифадаги автотранспорт хайдовчиси бўлиб, иш стажи " + internship_box.get() +
-                        " йил, " + car_box.get() + " русумли, давлат рақами " + car_number_box.get()]
-                    Condition = False
-                else:
-                    num += 1
-
-            # ===========================NOT EXCEL==============================
 
             # checking whether all entries are full
             if len(first_name_box.get()) == 0:
@@ -231,6 +210,20 @@ class MenuBar(tk.Menu):
             elif len(internship_box.get()) == 0:
                 messagebox.showwarning("Огоҳлантириш хабари!", "Илтимос, барча ёзувларни тўлдиринг!")
             else:
+                Condition = True
+                num = 5
+                while Condition:
+                    if wsDataBase.cells(num, "B").value is None:
+                        wsDataBase.cells(num, "B").value = [
+                            middle_name_box.get() + " " + first_name_box.get() + " " + last_name_box.get(),
+                            license_number_box.get(), garage_number_box.get(), car_box.get(), car_number_box.get(),
+                            middle_name_box.get() + " " + first_name_box.get() + "- маълумоти " + education_box.get() + ", <" +
+                            type_license_box.get() + "> тоифадаги автотранспорт хайдовчиси бўлиб, иш стажи " + internship_box.get() +
+                            " йил, " + car_box.get() + " русумли, давлат рақами " + car_number_box.get()]
+                        Condition = False
+                    else:
+                        num += 1
+
                 messagebox.showinfo("Муваффақият хабари", "Ўқитувчи маълумотлар базасига муваффақиятли қўшилди!")
 
             # removing the old data from cells
@@ -356,8 +349,11 @@ class MenuBar(tk.Menu):
         OptionListForInstructors = []
         for pos in range(len(masters)):
             OptionListForInstructors.append(masters[pos][0])
-
         # print(OptionListForInstructors)
+
+        # checking whether the list is empty
+        if len(OptionListForInstructors) == 0:
+            messagebox.showwarning("Огоҳлантириш хабари!", "Илтимос, аввал ўқитувчиларни маълумотлар базасига қўшинг!")
 
         variable_master = tk.StringVar(instructors_edit_frame)
         variable_master.set(OptionListForInstructors[0])
@@ -449,21 +445,6 @@ class MenuBar(tk.Menu):
                     record_selected = records
             # print("Records: " + str(record_selected))
 
-            # Taking Value and Add into Sheets
-            Condition = True
-            num = 5
-            while Condition:
-                if wsDataBase.cells(num, "B").value == record_selected[0]:
-                    wsDataBase.cells(num, "B").value = [
-                        middle_name_box.get() + " " + first_name_box.get() + " " + last_name_box.get(),
-                        license_number_box.get(), garage_number_box.get(), car_box.get(), car_number_box.get(),
-                        middle_name_box.get() + " " + first_name_box.get() + "- маълумоти " + education_box.get() + ", <" +
-                        type_license_box.get() + "> тоифадаги автотранспорт хайдовчиси бўлиб, иш стажи " + internship_box.get() +
-                        " йил, " + car_box.get() + " русумли, давлат рақами " + car_number_box.get()]
-                    Condition = False
-                else:
-                    num += 1
-
             # checking whether all entries are full
             if len(first_name_box.get()) == 0:
                 messagebox.showwarning("Огоҳлантириш хабари!", "Илтимос, барча ёзувларни тўлдиринг!")
@@ -486,6 +467,20 @@ class MenuBar(tk.Menu):
             elif len(internship_box.get()) == 0:
                 messagebox.showwarning("Огоҳлантириш хабари!", "Илтимос, барча ёзувларни тўлдиринг!")
             else:
+                Condition = True
+                num = 5
+                while Condition:
+                    if wsDataBase.cells(num, "B").value == record_selected[0]:
+                        wsDataBase.cells(num, "B").value = [
+                            middle_name_box.get() + " " + first_name_box.get() + " " + last_name_box.get(),
+                            license_number_box.get(), garage_number_box.get(), car_box.get(), car_number_box.get(),
+                            middle_name_box.get() + " " + first_name_box.get() + "- маълумоти " + education_box.get() + ", <" +
+                            type_license_box.get() + "> тоифадаги автотранспорт хайдовчиси бўлиб, иш стажи " + internship_box.get() +
+                            " йил, " + car_box.get() + " русумли, давлат рақами " + car_number_box.get()]
+                        Condition = False
+                    else:
+                        num += 1
+
                 messagebox.showinfo("Муваффақият хабари", "Ўқитувчи маълумотлар базасига муваффақиятли қўшилди!")
 
             # removing the old data from cells
