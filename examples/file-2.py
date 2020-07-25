@@ -12,7 +12,7 @@ geo("400x400+400+400")
 win['bg'] = 'orange'
 
 # get the list of files
-f_list = os.listdir('examples')
+f_list = os.listdir()
 
 l_box = tk.Listbox(win)
 l_box.pack()
