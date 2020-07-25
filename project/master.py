@@ -1032,8 +1032,19 @@ class MenuBar(tk.Menu):
             top_notebook.add(add_frame, text="Ўқувчини Қўшиш")
             top_notebook.add(edit_frame, text="Ўқувчини Янгилаш")
             top_notebook.add(delete_frame, text="Ўқувчини Ўчириш")
+
+            # Printing functions - Conncect with Printer
+            def print_doc1():
+                messagebox.showwarning("Info!", "Printing ... !")
+
+            # Addding the widgets to the first doc frame
+            # create listbox object
+            ttk.Label(doc_frame, text="Doc 1").grid(row=0, column=0, padx=10, pady=5)
+            doc1 = ttk.Button(doc_frame, text="Print", command=print_doc1)
+            doc1.grid(row=0, column=1, padx=10, pady=5)
         
-        # Opening a new window
+    
+        # Ending part - Opening a new window
         files_list_box.bind("<<ListboxSelect>>", show_content)
         scrollbar.config(command=files_list_box.yview)
 
