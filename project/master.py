@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import ttk  # Normal Tkinter.* widgets are not themed!
-from ttkthemes import ThemedStyle
+# from ttkthemes import ThemedStyle
 from tkinter import messagebox, END, TOP, RIGHT, NW, Y
 from tkcalendar import DateEntry
 import xlwings as xw
@@ -998,13 +998,43 @@ class MenuBar(tk.Menu):
 
         # Showing the list of groups
         files_list = os.listdir('groups')
-        files_list_box = tk.Listbox(db_groups_frame_inner, yscrollcommand=scrollbar.set, borderwidth=0, highlightthickness=0)
+        files_list_box = tk.Listbox(db_groups_frame_inner, yscrollcommand=scrollbar.set, width=50, height=50, borderwidth=0, highlightthickness=0)
         files_list_box.pack(padx=10, pady=10, side=TOP, anchor=NW)
         # THE ITEMS INSERTED WITH A LOOP
         for item in files_list:
             item = item[:-5]
             files_list_box.insert(END, item)
+        
+        def show_content(event):
+            # MAIN PART 
+            # Create a Notebook
+            top = tk.Toplevel()
+            top.title("Гурух Инфо")
 
+            # Creating a Notebook
+            top_notebook = ttk.Notebook(top)
+            top_notebook.pack(pady=10, padx=10)
+
+            # Initialize frames for notebooks
+            doc_frame = ttk.Frame(top_notebook)
+            add_frame = ttk.Frame(top_notebook)
+            edit_frame = ttk.Frame(top_notebook)
+            delete_frame = ttk.Frame(top_notebook)
+
+            # Place the frames on the screen
+            doc_frame.pack(fill="both", expand=1)
+            add_frame.pack(fill="both", expand=1)
+            edit_frame.pack(fill="both", expand=1)
+            delete_frame.pack(fill="both", expand=1)
+
+            # Add the notebooks
+            top_notebook.add(doc_frame, text="Барча Ҳужжатлар Рўйхати")
+            top_notebook.add(add_frame, text="Ўқувчини Қўшиш")
+            top_notebook.add(edit_frame, text="Ўқувчини Янгилаш")
+            top_notebook.add(delete_frame, text="Ўқувчини Ўчириш")
+        
+        # Opening a new window
+        files_list_box.bind("<<ListboxSelect>>", show_content)
         scrollbar.config(command=files_list_box.yview)
 
     def db_students(self):
@@ -1038,11 +1068,11 @@ class App(tk.Tk):
 
 if __name__ == "__main__":
     # Opening Excel File
-    wbDataBase = xw.Book('DataBase.xlsm')
+    # wbDataBase = xw.Book('DataBase.xlsm')
 
     app = App(None)
     app.title("AutoRoad")
     app.geometry("650x550+250+100")
-    style = ThemedStyle(app)
-    style.set_theme("breeze")
+    # style = ThemedStyle(app)
+    # style.set_theme("breeze")
     app.mainloop()
