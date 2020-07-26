@@ -431,8 +431,7 @@ class MenuBar(tk.Menu):
         internship_box = ttk.Entry(instructors_edit_frame)
         internship_box.grid(row=11, column=1, pady=3)
 
-        # "Ўқитувчилар" -- Second notebook
-                # Ikkinchi Notebook
+        # "Ўқитувчилар" -- SECOND NOTEBOOK 
         Condition_2 = True
         num = 5
         master_2 = []
@@ -1128,14 +1127,14 @@ class MenuBar(tk.Menu):
             birth_place_box.grid(row=6, column=1, pady=3)
             living_place_box = ttk.Entry(add_frame)
             living_place_box.grid(row=7, column=1, pady=3)
-
-            OptionList_T = ["teach","6", "7", "8"]
+            OptionList_T = [
+                "teach","6", "7", "8"
+                ]
             variable_t = tk.StringVar(add_frame)
             variable_t.set(OptionList_T[0])
             opt_t = ttk.OptionMenu(add_frame, variable_t, OptionList_T[0], *OptionList_T)
             opt_t.config(width=16)
             opt_t.grid(row=8, column=1, pady=3)
-
             by_district_box = ttk.Entry(add_frame)
             by_district_box.grid(row=9, column=1, pady=3)
             passport_place_box = ttk.Entry(add_frame)
@@ -1156,7 +1155,7 @@ class MenuBar(tk.Menu):
             doc_num_auto_box.grid(row=17, column=1, pady=3)
             doc_num_rib_box = ttk.Entry(add_frame)
             doc_num_rib_box.grid(row=18, column=1, pady=3)
-
+    
             def db_students_add():
                 # checking whether all entries are entered
                 if len(first_name_box.get()) == 0:
@@ -1208,18 +1207,22 @@ class MenuBar(tk.Menu):
                 doc_num_auto_box.delete(0, END)
                 doc_num_rib_box.delete(0, END)
            
-            instructors_add = ttk.Button(add_frame, text="Маълумотлар базасига қўшиш", command=db_students_add)
-            instructors_add.grid(row=19, column=1, pady=5)
+            students_add = ttk.Button(add_frame, text="Маълумотлар базасига қўшиш", command=db_students_add)
+            students_add.grid(row=19, column=1, pady=5)
 
             # ===================== 2-2-2 adding end =====================
 
             # ===================== 3-3-3 editing start ==================
-           
 
+            def db_students_edit():
+                pass
+
+            students_edit = ttk.Button(edit_frame, text="Маълумотлар базасини янгилаш", command=db_students_edit)
+            students_edit.grid(row=19, column=1, pady=5)
             # ===================== 3-3-3 editing end ====================
 
             # ===================== 4-4-4 deleting start =================
-            ttk.Label(delete_frame, text="333").grid(row=0, column=0, padx=10, pady=5)
+            ttk.Label(delete_frame, text="333").grid(row=0, column=0, padx=20, pady=5)
 
 
             # ===================== 4-4-4 deleting end ===================
