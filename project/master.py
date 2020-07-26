@@ -194,7 +194,7 @@ class MenuBar(tk.Menu):
         # Function which add a teacher to db
         def db_teachers_add():
             # Opening Excel File
-            wbDataBase = xw.Book('DataBase.xlsm')
+            # wbDataBase = xw.Book('DataBase.xlsm')
             wsDataBase = wbDataBase.sheets['TEACHERS']
 
             # Checking whether all entries are entered
@@ -249,8 +249,8 @@ class MenuBar(tk.Menu):
             internship_box.delete(0, END)
 
         def db_others_add():
-             # Opening Excel File
-            wbDataBase = xw.Book('DataBase.xlsm')
+            # Opening Excel File
+            # wbDataBase = xw.Book('DataBase.xlsm')
             wsDataBase = wbDataBase.sheets['TEACHERS']
 
             # checking whether all entries are entered
@@ -328,7 +328,7 @@ class MenuBar(tk.Menu):
         teachers_edit_notebook.add(others_edit_frame, text="Ўқит-ни Янгилаш")
 
         # Opening Excel File
-        wbDataBase = xw.Book('DataBase.xlsm')
+        # wbDataBase = xw.Book('DataBase.xlsm')
         wsDataBase = wbDataBase.sheets['TEACHERS']
 
         # Take the data from excel as python list
@@ -388,8 +388,8 @@ class MenuBar(tk.Menu):
         # print(OptionListForInstructors)
 
         # Cheack whether the list is empty
-        if len(OptionListForInstructors) == 0:
-            messagebox.showwarning("Огоҳлантириш хабари!", "Илтимос, аввал ўқитувчиларни маълумотлар базасига қўшинг!")
+        # if len(OptionListForInstructors) == 0:
+        #     messagebox.showwarning("Огоҳлантириш хабари!", "Илтимос, аввал ўқитувчиларни маълумотлар базасига қўшинг!")
 
         variable_master = tk.StringVar(instructors_edit_frame)
         variable_master.set(OptionListForInstructors[0])
@@ -477,8 +477,8 @@ class MenuBar(tk.Menu):
             OptionListForOthers.append(masters_2[pos][0])
 
         # Cheack whether the list is empty
-        if len(OptionListForOthers) == 0:
-            messagebox.showwarning("Огоҳлантириш хабари!", "Илтимос, аввал ўқитувчиларни маълумотлар базасига қўшинг!")
+        # if len(OptionListForOthers) == 0:
+        #     messagebox.showwarning("Огоҳлантириш хабари!", "Илтимос, аввал ўқитувчиларни маълумотлар базасига қўшинг!")
 
         variable_others = tk.StringVar(others_edit_frame)
         variable_others.set(OptionListForOthers[0])
@@ -830,7 +830,7 @@ class MenuBar(tk.Menu):
 
             for i, var in enumerate(o_vars):
                 masters_counter += 1
-                # print(var.get())
+                print(var.get())
 
             # checking whether all entries are full
             if len(groups_number_entry.get()) == 0:
