@@ -228,7 +228,8 @@ class MenuBar(tk.Menu):
                             license_number_box.get(), garage_number_box.get(), car_box.get(), car_number_box.get(),
                             middle_name_box.get() + " " + first_name_box.get() + "- маълумоти " + education_box.get() + ", <" +
                             type_license_box.get() + "> тоифадаги автотранспорт хайдовчиси бўлиб, иш стажи " + internship_box.get() +
-                            " йил, " + car_box.get() + " русумли, давлат рақами " + car_number_box.get()]
+                            " йил, " + car_box.get() + " русумли, давлат рақами " + car_number_box.get()+
+                             " . Ўқитиш хуқуқи берилган гувохномаси бор. "]
                         Condition = False
                     else:
                         num += 1
@@ -269,10 +270,11 @@ class MenuBar(tk.Menu):
                 while Condition:
                     if wsDataBase.cells(num, "I").value is None:
                         wsDataBase.cells(num, "I").value = [
-                            t_first_name_box.get()+" "+t_middle_name_box.get()+" "+t_last_name_box.get(),
+                            t_middle_name_box.get()+" "+t_first_name_box.get()+" "+t_last_name_box.get(),
                             "Автотранспорт воситаларининг тузилиши ва техник хизмат кўрсатиш фанидан: " +
-                            t_first_name_box.get()+" "+t_middle_name_box.get()+" маълумоти "+
-                            t_education_box.get()+" , мутахасислиги- "+ t_specialization_box.get()+""
+                            t_middle_name_box.get()+" "+t_first_name_box.get()+" маълумоти "+
+                            t_education_box.get()+" , мутахасислиги - "+ t_specialization_box.get()+
+                            ", автомобил эксплуатацияси мухандиси."
                         ]
                         Condition = False
                     else:
@@ -281,13 +283,14 @@ class MenuBar(tk.Menu):
                 # Variables for auto or first aid
                 if variable_1.get() == "Авто.туз & ЙХК":
                     wsDataBase.cells(num,"K").value = ["Йўл харакати қоидалари ва харакат  хафсизлиги,  асосларидан: "+
-                    t_first_name_box.get()+" "+t_middle_name_box.get() +" маълумоти "+t_education_box.get()+
-                    ", мутахасислиги- "+t_specialization_box.get()
+                    t_middle_name_box.get()+" "+t_first_name_box.get() +" маълумоти "+t_education_box.get()+
+                    ", мутахасислиги - "+t_specialization_box.get() + ", автомобил эксплуатацияси мухандиси. "
                     ]
                 elif variable_1.get() == "Тиббий ёрдам":
                     wsDataBase.cells(num,"L").value = ["Тиббий ёрдам кўрсатишдан: "+
-                    t_first_name_box.get()+" "+t_middle_name_box.get() +" маълумоти "+t_education_box.get()
-                    ]
+                    t_middle_name_box.get()+" "+t_first_name_box.get() +" маълумоти "+t_education_box.get()]
+                    wsDataBase.cells(num,"J").value = None
+
 
                 messagebox.showinfo("Муваффақият хабари", "Ўқитувчи маълумотлар базасига муваффақиятли қўшилди!")
                 
@@ -583,14 +586,24 @@ class MenuBar(tk.Menu):
                 while Condition_2:
                     if wsDataBase.cells(num, "I").value == record_selected[0]:
                         wsDataBase.cells(num, "I").value = [
-                            t_first_name_box.get()+" "+t_middle_name_box.get()+" "+t_last_name_box.get(),
+                            t_middle_name_box.get()+" "+t_first_name_box.get()+" "+t_last_name_box.get(),
                             "Автотранспорт воситаларининг тузилиши ва техник хизмат кўрсатиш фанидан: " +
-                            t_first_name_box.get()+" "+t_middle_name_box.get()+" маълумоти "+
-                            t_education_box.get()+" , мутахасислиги- "+ t_specialization_box.get()+""
+                            t_middle_name_box.get()+" "+t_first_name_box.get()+" маълумоти "+
+                            t_education_box.get()+" , мутахасислиги - "+ t_specialization_box.get()+
+                            ", автомобил эксплуатацияси мухандиси."
                         ]
                         Condition_2 = False
                     else:
                         num += 1
+                if wsDataBase.cells(num,"K").value == None:
+                    wsDataBase.cells(num,"L").value = ["Тиббий ёрдам кўрсатишдан: "+
+                    t_middle_name_box.get()+" "+t_first_name_box.get() +" маълумоти "+t_education_box.get()]
+                    wsDataBase.cells(num,"J").value = None
+                else:
+                    wsDataBase.cells(num,"K").value = ["Йўл харакати қоидалари ва харакат  хафсизлиги,  асосларидан: "+
+                    t_middle_name_box.get()+" "+t_first_name_box.get() +" маълумоти "+t_education_box.get()+
+                    ", мутахасислиги - "+t_specialization_box.get() + ", автомобил эксплуатацияси мухандиси. "
+                    ]
 
                 messagebox.showinfo("Муваффақият хабари", "Ўқитувчи маълумотлар базасидан муваффақиятли янгиланди!")
 
@@ -1081,7 +1094,7 @@ class MenuBar(tk.Menu):
         def show_content(event):
             # MAIN PART 
             # Create a Notebook
-            top = tk.Toplevel()
+            top = tk.Tk()
             top.title("Гурух Инфо")
 
             # Creating a Notebook
@@ -1282,12 +1295,12 @@ class App(tk.Tk):
 
 
 if __name__ == "__main__":
+    # Opening Excel File
+    #wbDataBase = xw.Book('DataBase.xlsm')
 
     app = App(None)
     app.title("AutoRoad")
     app.geometry("650x550+250+100")
     style = ThemedStyle(app)
     style.set_theme("breeze")
-    # Opening Excel File
-    wbDataBase = xw.Book('DataBase.xlsm')
     app.mainloop()
