@@ -1500,3 +1500,6 @@ if __name__ == "__main__":
     style = ThemedStyle(app)
     style.set_theme("breeze")
     app.mainloop()
+
+# Changeed the opening of files
+# commented the validatoin of OptionList[0f]
