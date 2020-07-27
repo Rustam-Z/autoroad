@@ -194,7 +194,7 @@ class MenuBar(tk.Menu):
         # Function which add a teacher to db
         def db_teachers_add():
             # Opening Excel File
-            wbDataBase = xw.Book('DataBase.xlsm')
+            # wbDataBase = xw.Book('DataBase.xlsm')
             wsDataBase = wbDataBase.sheets['TEACHERS']
 
             # Checking whether all entries are entered
@@ -250,7 +250,7 @@ class MenuBar(tk.Menu):
 
         def db_others_add():
              # Opening Excel File
-            wbDataBase = xw.Book('DataBase.xlsm')
+            # wbDataBase = xw.Book('DataBase.xlsm')
             wsDataBase = wbDataBase.sheets['TEACHERS']
 
             # checking whether all entries are entered
@@ -328,7 +328,7 @@ class MenuBar(tk.Menu):
         teachers_edit_notebook.add(others_edit_frame, text="Ўқит-ни Янгилаш")
 
         # Opening Excel File
-        wbDataBase = xw.Book('DataBase.xlsm')
+        # wbDataBase = xw.Book('DataBase.xlsm')
         wsDataBase = wbDataBase.sheets['TEACHERS']
 
         # Take the data from excel as python list
@@ -629,7 +629,7 @@ class MenuBar(tk.Menu):
         param.pack(padx=10, pady=10)
 
         # Opening Excel File
-        wbDataBase = xw.Book('DataBase.xlsm')
+        # wbDataBase = xw.Book('DataBase.xlsm')
         wsDataBase = wbDataBase.sheets['TEACHERS']
 
         # Taking data from excel as list
@@ -790,7 +790,7 @@ class MenuBar(tk.Menu):
         opt.grid(row=3, column=3, padx=10, pady=10)
 
         # ================= Opening Excel ================ 
-        wbDataBase = xw.Book('DataBase.xlsm')
+        # wbDataBase = xw.Book('DataBase.xlsm')
         wsDataBase = wbDataBase.sheets['TEACHERS']
 
         # Ustalar List from database
@@ -899,7 +899,7 @@ class MenuBar(tk.Menu):
                 messagebox.showwarning("Огоҳлантириш хабари!", "Илтимос, барча ёзувларни тўлдиринг!")
             else:
                 # ================= Opening Excel ================ 
-                wbDataBase = xw.Book('DataBase.xlsm')
+                # wbDataBase = xw.Book('DataBase.xlsm')
                 wsDataBaseGR = wbDataBase.sheets['DATABASE']
                 # Group Datas
                 wsDataBaseGR.range("B3").value = groups_number_entry.get()
@@ -1612,4 +1612,5 @@ if __name__ == "__main__":
     style.set_theme("breeze")
 
     app.mainloop()
+
     wbDataBase.close()
