@@ -1208,6 +1208,9 @@ class MenuBar(tk.Menu):
             top = tk.Tk()
             top.title("Гурух Инфо")
 
+            style_top = ThemedStyle(top)
+            style_top.set_theme("arc")
+
             # Creating a Notebook
             top_notebook = ttk.Notebook(top)
             top_notebook.pack(pady=10, padx=10)
@@ -1609,7 +1612,7 @@ if __name__ == "__main__":
     app.title("AutoRoad")
     app.geometry("650x550+250+100")
     style = ThemedStyle(app)
-    style.set_theme("breeze")
+    style.set_theme("arc")
 
     app.mainloop()
 
