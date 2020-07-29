@@ -6,7 +6,9 @@ from PIL import Image, ImageTk
 class Splash(tk.Toplevel):
     def __init__(self, parent):
         tk.Toplevel.__init__(self, parent)
-        self.title("Splash")
+        self.title("Xabar")
+        self.geometry("400x400+480+200")
+        tk.Label(self, text="Kuting, ma'lumotlar bazasi yuklanmoqda.").pack()
         
 
         ## required to make window show before the program gets to the mainloop

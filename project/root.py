@@ -6,6 +6,18 @@ from tkcalendar import DateEntry
 import xlwings as xw
 import os
 
+
+class Splash(tk.Toplevel):
+    def __init__(self, parent):
+        tk.Toplevel.__init__(self, parent)
+        self.title("Xabar")
+        self.geometry("400x400+480+200")
+        tk.Label(self, text="Kuting, ma'lumotlar bazasi yuklanmoqda.").pack()
+        
+        ## required to make window show before the program gets to the mainloop
+        self.update()
+
+
 class MenuBar(tk.Menu):
     def __init__(self, master):
         tk.Menu.__init__(self, master)
@@ -1206,7 +1218,7 @@ class MenuBar(tk.Menu):
             # Create a Notebook
             top = tk.Tk()
             top.title("Гурух Инфо")
-            top.geometry("600x700+250+150")
+            top.geometry("600x650+250+150")
             style_top = ThemedStyle(top)
             style_top.set_theme("arc")
 
@@ -1798,9 +1810,11 @@ class MenuBar(tk.Menu):
     def info_about(self):
         self.hide_all_frames()
         self.info_about_frame.pack(fill="both", expand=1)
-        p1 = ttk.Label(self.info_about_frame, text="About Us")
-        p1.pack()
-
+        p1 = ttk.Label(self.info_about_frame, text="Дастур ҳақида")
+        p1.pack(padx=10, pady=10)
+        p2 = tk.Text(self.info_about_frame, height=8, width=51, borderwidth=0)
+        p2.pack()
+        p2.insert(tk.END, "Агар дастурда бирон бир муаммога дуч келсангиз ёки дастурни яхшилаш бўйича бирон бир таклифингиз бўлса, биз билан қуйидаги телефонлар орқали боғланишингиз мумкин: +998974060656 Рустам, +998904006102 Абдуллох")
 
 class App(tk.Tk):
     def __init__(self, master):
