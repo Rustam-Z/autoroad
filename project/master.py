@@ -872,7 +872,11 @@ class MenuBar(tk.Menu):
             o_vars.append(variable_masters)
             opt = ttk.OptionMenu(groups_inside_frame, variable_masters, OptionList_Masrer[0], *OptionList_Masrer)
             opt.config(width=16)
-            opt.grid(row=5, column=1+i, pady=10)
+            opt.grid(row=5, column=1+i, pady=5)
+        
+        # Машғулот якунланиши
+        # ending_day_label = ttk.Label(groups_inside_frame, text="Машғулот якунланиши").grid(row=6, column=2)
+        # ending_day_btn = ttk.Button(groups_inside_frame, text="")
         
         def db_groups_add():
             # masters_counter = 0
@@ -970,13 +974,10 @@ class MenuBar(tk.Menu):
             # Remove the old data from cells
             groups_number_entry.delete(0, END)
             time_duration_entry.delete(0, END)
-        
+
         # Button for saving the info into db
         groups_add = ttk.Button(groups_inside_frame, text="Маълумотлар базасига қўшиш", command=db_groups_add)
-        groups_add.grid(row=6, column=1, columnspan=2, pady=5)
-
-
-
+        groups_add.grid(row=6, column=2, columnspan=2, pady=5)
 
     def groups_edit(self):
         self.hide_all_frames()
@@ -1370,12 +1371,12 @@ class MenuBar(tk.Menu):
                     messagebox.showwarning("Огоҳлантириш хабари!", "Илтимос, барча ёзувларни тўлдиринг!")
                 elif len(passport_box.get()) == 0:
                     messagebox.showwarning("Огоҳлантириш хабари!", "Илтимос, барча ёзувларни тўлдиринг!") 
-                elif len(med_place_box.get()) == 0:
-                    messagebox.showwarning("Огоҳлантириш хабари!", "Илтимос, барча ёзувларни тўлдиринг!")
-                elif len(med_num_box.get()) == 0:
-                    messagebox.showwarning("Огоҳлантириш хабари!", "Илтимос, барча ёзувларни тўлдиринг!")
-                elif len(doc_num_box.get()) == 0:
-                    messagebox.showwarning("Огоҳлантириш хабари!", "Илтимос, барча ёзувларни тўлдиринг!")
+                # elif len(med_place_box.get()) == 0:
+                #     messagebox.showwarning("Огоҳлантириш хабари!", "Илтимос, барча ёзувларни тўлдиринг!")
+                # elif len(med_num_box.get()) == 0:
+                #     messagebox.showwarning("Огоҳлантириш хабари!", "Илтимос, барча ёзувларни тўлдиринг!")
+                # elif len(doc_num_box.get()) == 0:
+                #     messagebox.showwarning("Огоҳлантириш хабари!", "Илтимос, барча ёзувларни тўлдиринг!")
                 # elif len(doc_num_auto_box.get()) == 0:
                 #     messagebox.showwarning("Огоҳлантириш хабари!", "Илтимос, барча ёзувларни тўлдиринг!")
                 # elif len(doc_num_rib_box.get()) == 0:
