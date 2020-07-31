@@ -1,3 +1,8 @@
+# PROJECT DONE BY JULY 31, 2020
+# RUSTAM & ABDULLOKH
+# EIGHTSOFT ACADEMY
+# +998 97 406 06 56
+
 import tkinter as tk
 from tkinter import ttk  # Normal Tkinter.* widgets are not themed!
 from ttkthemes import ThemedStyle
