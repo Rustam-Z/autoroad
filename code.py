@@ -5,17 +5,7 @@ from tkinter import messagebox, END, TOP, RIGHT, NW, Y
 from tkcalendar import DateEntry
 import xlwings as xw
 import os
-
-
-class Splash(tk.Toplevel):
-    def __init__(self, parent):
-        tk.Toplevel.__init__(self, parent)
-        self.title("Xabar")
-        self.geometry("400x400+480+200")
-        tk.Label(self, text="Kuting, ma'lumotlar bazasi yuklanmoqda.").pack()
-        
-        ## required to make window show before the program gets to the mainloop
-        self.update()
+from tkinter import filedialog
 
 
 class MenuBar(tk.Menu):
@@ -145,7 +135,7 @@ class MenuBar(tk.Menu):
         # "Усталap" - First notebook
         first_name_label = ttk.Label(instructors_frame, text="Исм").grid(row=1, column=0, padx=10, pady=5)
         middle_name_label = ttk.Label(instructors_frame, text="Фамилия").grid(row=2, column=0, padx=10)
-        last_name_label = ttk.Label(instructors_frame, text="Отчество").grid(row=3, column=0, padx=10)
+        last_name_label = ttk.Label(instructors_frame, text="Отасининг исми").grid(row=3, column=0, padx=10)
         license_number_label = ttk.Label(instructors_frame, text="Х/Г №").grid(row=4, column=0, padx=10)
         garage_number_label = ttk.Label(instructors_frame, text="Гар. №").grid(row=5, column=0, padx=10)
         car_label = ttk.Label(instructors_frame, text="Марка").grid(row=6, column=0, padx=10)
@@ -187,7 +177,7 @@ class MenuBar(tk.Menu):
 
         t_first_name_label = ttk.Label(others_frame, text="Исм").grid(row=1, column=0, padx=10)
         t_middle_name_label = ttk.Label(others_frame, text="Фамилия").grid(row=2, column=0, padx=10)
-        t_last_name_label = ttk.Label(others_frame, text="Отчество").grid(row=3, column=0, padx=10)
+        t_last_name_label = ttk.Label(others_frame, text="Отасининг исми").grid(row=3, column=0, padx=10)
         t_education_label = ttk.Label(others_frame, text="Маълумоти").grid(row=4, column=0, padx=10)
         t_specialization_label = ttk.Label(others_frame, text="Мутахасислиги").grid(row=5, column=0, padx=10)
 
@@ -413,7 +403,7 @@ class MenuBar(tk.Menu):
         # Labels for the first notebook
         first_name_label = ttk.Label(instructors_edit_frame, text="Исм").grid(row=1, column=0, padx=10)
         middle_name_label = ttk.Label(instructors_edit_frame, text="Фамилия").grid(row=2, column=0, padx=10)
-        last_name_label = ttk.Label(instructors_edit_frame, text="Отчество").grid(row=3, column=0, padx=10)
+        last_name_label = ttk.Label(instructors_edit_frame, text="Отасининг исми").grid(row=3, column=0, padx=10)
         license_number_label = ttk.Label(instructors_edit_frame, text="Х/Г №").grid(row=4, column=0, padx=10)
         garage_number_label = ttk.Label(instructors_edit_frame, text="Гар. №").grid(row=5, column=0, padx=10)
         car_label = ttk.Label(instructors_edit_frame, text="Марка").grid(row=6, column=0, padx=10)
@@ -502,7 +492,7 @@ class MenuBar(tk.Menu):
         # Create Lables for the second notebook
         t_first_name_label = ttk.Label(others_edit_frame, text="Исм").grid(row=1, column=0, padx=10)
         t_middle_name_label = ttk.Label(others_edit_frame, text="Фамилия").grid(row=2, column=0, padx=10)
-        t_last_name_label = ttk.Label(others_edit_frame, text="Отчество").grid(row=3, column=0, padx=10)
+        t_last_name_label = ttk.Label(others_edit_frame, text="Отасининг исми").grid(row=3, column=0, padx=10)
         t_education_label = ttk.Label(others_edit_frame, text="Маълумоти").grid(row=4, column=0, padx=10)
         t_specialization_label = ttk.Label(others_edit_frame, text="Мутахасислиги").grid(row=5, column=0, padx=10)
 
@@ -882,7 +872,11 @@ class MenuBar(tk.Menu):
             o_vars.append(variable_masters)
             opt = ttk.OptionMenu(groups_inside_frame, variable_masters, OptionList_Masrer[0], *OptionList_Masrer)
             opt.config(width=16)
-            opt.grid(row=5, column=1+i, pady=10)
+            opt.grid(row=5, column=1+i, pady=5)
+        
+        # Машғулот якунланиши
+        # ending_day_label = ttk.Label(groups_inside_frame, text="Машғулот якунланиши").grid(row=6, column=2)
+        # ending_day_btn = ttk.Button(groups_inside_frame, text="")
         
         def db_groups_add():
             # masters_counter = 0
@@ -980,10 +974,10 @@ class MenuBar(tk.Menu):
             # Remove the old data from cells
             groups_number_entry.delete(0, END)
             time_duration_entry.delete(0, END)
-        
+
         # Button for saving the info into db
         groups_add = ttk.Button(groups_inside_frame, text="Маълумотлар базасига қўшиш", command=db_groups_add)
-        groups_add.grid(row=6, column=1, columnspan=2, pady=5)
+        groups_add.grid(row=6, column=2, columnspan=2, pady=5)
 
     def groups_edit(self):
         self.hide_all_frames()
@@ -1218,7 +1212,7 @@ class MenuBar(tk.Menu):
             # Create a Notebook
             top = tk.Tk()
             top.title("Гурух Инфо")
-            top.geometry("600x650+250+150")
+            top.geometry("600x700+250+150")
             style_top = ThemedStyle(top)
             style_top.set_theme("arc")
 
@@ -1248,11 +1242,15 @@ class MenuBar(tk.Menu):
             # Addding the widgets to the first doc frame
             # Printing functions - Conncect with Printer
             def print_doc1():
-                messagebox.showwarning("Info!", "Printing ... !")
+                messagebox.showwarning("Ҳабарнома!", "Очилмоқда... !")
+                # Opening Files by using filedialog
+                top.filename = filedialog.askopenfilename(
+                initialdir="groups",
+                title="Select A File", filetypes=(("Excel files", "*.xlsm"),("all files", "*.*")))
 
             # create listbox object
-            ttk.Label(doc_frame, text="Doc 1").grid(row=0, column=0, padx=10, pady=5)
-            doc1 = ttk.Button(doc_frame, text="Print", command=print_doc1)
+            ttk.Label(doc_frame, text="Гуруҳ ҳақида маълумотлар").grid(row=0, column=0, padx=10, pady=5)
+            doc1 = ttk.Button(doc_frame, text="Ҳужжатни очиш", command=print_doc1)
             doc1.grid(row=0, column=1, padx=10, pady=5)
             # ===================== 1-1-1 docs end =======================
 
@@ -1264,7 +1262,7 @@ class MenuBar(tk.Menu):
             # ===================== 2-2-2 adding start ===================
             ttk.Label(add_frame, text="Исм").grid(row=1, column=0, padx=10, pady=5)
             ttk.Label(add_frame, text="Фамилия").grid(row=2, column=0, padx=10)
-            ttk.Label(add_frame, text="Отчество").grid(row=3, column=0, padx=10)
+            ttk.Label(add_frame, text="Отасининг исми").grid(row=3, column=0, padx=10)
             ttk.Label(add_frame, text="Тугилган йили").grid(row=4, column=0, padx=10)
             ttk.Label(add_frame, text="Маълумоти").grid(row=5, column=0, padx=10)
             ttk.Label(add_frame, text="Тугилган жойи").grid(row=6, column=0, padx=10)
@@ -1373,12 +1371,12 @@ class MenuBar(tk.Menu):
                     messagebox.showwarning("Огоҳлантириш хабари!", "Илтимос, барча ёзувларни тўлдиринг!")
                 elif len(passport_box.get()) == 0:
                     messagebox.showwarning("Огоҳлантириш хабари!", "Илтимос, барча ёзувларни тўлдиринг!") 
-                elif len(med_place_box.get()) == 0:
-                    messagebox.showwarning("Огоҳлантириш хабари!", "Илтимос, барча ёзувларни тўлдиринг!")
-                elif len(med_num_box.get()) == 0:
-                    messagebox.showwarning("Огоҳлантириш хабари!", "Илтимос, барча ёзувларни тўлдиринг!")
-                elif len(doc_num_box.get()) == 0:
-                    messagebox.showwarning("Огоҳлантириш хабари!", "Илтимос, барча ёзувларни тўлдиринг!")
+                # elif len(med_place_box.get()) == 0:
+                #     messagebox.showwarning("Огоҳлантириш хабари!", "Илтимос, барча ёзувларни тўлдиринг!")
+                # elif len(med_num_box.get()) == 0:
+                #     messagebox.showwarning("Огоҳлантириш хабари!", "Илтимос, барча ёзувларни тўлдиринг!")
+                # elif len(doc_num_box.get()) == 0:
+                #     messagebox.showwarning("Огоҳлантириш хабари!", "Илтимос, барча ёзувларни тўлдиринг!")
                 # elif len(doc_num_auto_box.get()) == 0:
                 #     messagebox.showwarning("Огоҳлантириш хабари!", "Илтимос, барча ёзувларни тўлдиринг!")
                 # elif len(doc_num_rib_box.get()) == 0:
@@ -1402,7 +1400,6 @@ class MenuBar(tk.Menu):
                         else:
                             Condition = False
 
-                    wbDataBaseGR.save()
 
                     messagebox.showinfo("Муваффақият хабари", "Ўқитувчи маълумотлар базасига муваффақиятли қўшилди!")
                     
@@ -1518,7 +1515,7 @@ class MenuBar(tk.Menu):
 
             ttk.Label(edit_frame, text="Исм").grid(row=1, column=0, padx=10, pady=5)
             ttk.Label(edit_frame, text="Фамилия").grid(row=2, column=0, padx=10)
-            ttk.Label(edit_frame, text="Отчество").grid(row=3, column=0, padx=10)
+            ttk.Label(edit_frame, text="Отасининг исми").grid(row=3, column=0, padx=10)
             ttk.Label(edit_frame, text="Тугилган йили").grid(row=4, column=0, padx=10)
             ttk.Label(edit_frame, text="Маълумоти").grid(row=5, column=0, padx=10)
             ttk.Label(edit_frame, text="Тугилган жойи").grid(row=6, column=0, padx=10)
@@ -1635,8 +1632,6 @@ class MenuBar(tk.Menu):
                         else:
                             Condition = False
                             
-                    wbDataBaseGR.save()
-
 
                     messagebox.showinfo("Муваффақият хабари", "Ўқитувчи маълумотлар базасига муваффақиятли қўшилди!")
                     
@@ -1720,39 +1715,6 @@ class MenuBar(tk.Menu):
             variable_del_st.trace("w", callback)
 
             def db_students_delete():
-                # =================== EXCEL OPEN ======================
-                # Taking teachers from that Database
-                wbDataBaseGR =  xw.Book('groups/{}.xlsm'.format(files_list_box.get(x)))
-                wsDataBaseGR = wbDataBaseGR.sheets['DATABASE']
-
-                # Taking Datas from Databse of Groups
-                Condition_2 = True
-                num = 15
-                master_2 = []
-                while Condition_2:
-                    if wsDataBaseGR.cells(num, "C").value is not None:
-                        master_2.append(wsDataBaseGR.cells(num, "C").value)
-                        master_2.append(wsDataBaseGR.cells(num, "D").value)
-                        master_2.append(wsDataBaseGR.cells(num, "E").value)
-                        master_2.append(wsDataBaseGR.cells(num, "F").value)
-                        master_2.append(wsDataBaseGR.cells(num, "G").value)
-                        master_2.append(wsDataBaseGR.cells(num, "H").value)
-                        master_2.append(wsDataBaseGR.cells(num, "I").value)
-                        master_2.append(wsDataBaseGR.cells(num, "J").value)
-                        master_2.append(wsDataBaseGR.cells(num, "K").value)
-                        master_2.append(wsDataBaseGR.cells(num, "L").value)
-                        master_2.append(wsDataBaseGR.cells(num, "M").value)
-                        master_2.append(wsDataBaseGR.cells(num, "N").value)
-                        master_2.append(wsDataBaseGR.cells(num, "O").value)
-                        master_2.append(wsDataBaseGR.cells(num, "P").value)
-                        master_2.append(wsDataBaseGR.cells(num, "Q").value)
-                        master_2.append(wsDataBaseGR.cells(num, "R").value)
-                        num += 1
-                    else:
-                        Condition_2 = False
-
-                masters_2 = [master_2[x:x + 16] for x in range(0, len(master_2), 16)]                
-                # ======================= not Excel ======================
                 num = 15
                 wsDataBaseGR.range("C15:R39").value = None
                 for records in masters_2:
@@ -1773,14 +1735,12 @@ class MenuBar(tk.Menu):
                             records[12],
                             records[13],
                             records[14],
-                            records[15],
-                            records[16]]
+                            records[15]
+                            ]
                         num += 1
+                
 
                 messagebox.showinfo("Муваффақият хабари", "Ўқитувчи маълумотлар базасидан муваффақиятли ўчирилди!")
-                top.destroy()
-                show_content(event)
-
 
 
             # Create a Delete Button
@@ -1793,6 +1753,7 @@ class MenuBar(tk.Menu):
         # Ending part - Opening a new window
         files_list_box.bind("<<ListboxSelect>>", show_content)
         scrollbar.config(command=files_list_box.yview)
+        
 
     def db_students(self):
         self.hide_all_frames()
@@ -1806,15 +1767,16 @@ class MenuBar(tk.Menu):
         p1 = ttk.Label(self.db_teachers_frame, text="Teachers Database")
         p1.pack()
 
-    # Info About us
+# Info About us
     def info_about(self):
         self.hide_all_frames()
         self.info_about_frame.pack(fill="both", expand=1)
         p1 = ttk.Label(self.info_about_frame, text="Дастур ҳақида")
         p1.pack(padx=10, pady=10)
-        p2 = tk.Text(self.info_about_frame, height=8, width=51, borderwidth=0)
+        p2 = tk.Text(self.info_about_frame, height=8, width=52, borderwidth=0)
         p2.pack()
         p2.insert(tk.END, "Агар дастурда бирон бир муаммога дуч келсангиз ёки дастурни яхшилаш бўйича бирон бир таклифингиз бўлса, биз билан қуйидаги телефонлар орқали боғланишингиз мумкин: +998974060656 Рустам, +998904006102 Абдуллох")
+
 
 class App(tk.Tk):
     def __init__(self, master):
@@ -1839,7 +1801,7 @@ if __name__ == "__main__":
     # Opening Excel File
     app_xl = xw.App(visible=False)
     wbDataBase = xw.Book('DataBase.xlsm')
-
+    
     app = App(None)
     app.title("AutoRoad")
     app.geometry("650x550+250+100")
